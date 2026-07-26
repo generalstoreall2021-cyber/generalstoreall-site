@@ -92,28 +92,21 @@
   .header-inner{
     max-width: var(--max);
     margin: 0 auto;
-    padding: 16px 24px;
+    padding: 12px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
   }
   .logotype{
-    font-family: 'Shippori Mincho', serif;
-    font-weight: 700;
-    font-size: 1.05rem;
-    letter-spacing: .06em;
+    display: flex;
+    align-items: center;
     text-decoration: none;
     white-space: nowrap;
   }
-  .logotype span{
+  .logotype img{
+    height: 44px;
     display: block;
-    font-family: 'Zen Kaku Gothic New', sans-serif;
-    font-weight: 500;
-    font-size: .62rem;
-    letter-spacing: .3em;
-    color: var(--ink-soft);
-    margin-top: 2px;
   }
   nav.primary-nav{
     display: none;
@@ -462,7 +455,7 @@
 
 <header>
   <div class="header-inner">
-    <a href="#top" class="logotype">General Store All</a>
+    <a href="#top" class="logotype"><img src="logo-transparent.png" alt="General Store All"></a>
     <nav class="primary-nav">
       <a href="#flow">ご利用の流れ</a>
       <a href="#reasons">選ばれる理由</a>
