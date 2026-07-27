@@ -154,7 +154,10 @@
 
         <div class="field">
           <label for="tel">電話番号 <span class="req">必須</span></label>
-          <input type="tel" id="tel" name="tel" required autocomplete="tel">
+          <input type="tel" id="tel" name="tel" required autocomplete="tel"
+                 inputmode="tel" maxlength="13"
+                 pattern="0[0-9]{1,4}-?[0-9]{1,4}-?[0-9]{4}"
+                 title="ハイフンありなしで日本の電話番号を入力してください（例：070-8546-0262）">
         </div>
 
         <div class="field">
@@ -211,7 +214,7 @@
     <div>お申し込み・お問い合わせ／埼玉エリア対応　TEL 070-8546-0262</div>
     <div style="margin-top:10px;">&copy; General Store All</div>
     <div style="margin-top:10px; font-size:.76rem;">
-      <a href="privacy.html" style="text-decoration:underline;">個人情報の取り扱いについて</a>　|　
+      <a href="privacy.html" style="text-decoration:underline;">個人情報の取り扱いについて</a>　|
       <a href="tokushoho.html" style="text-decoration:underline;">特定商取引法に基づく表記</a>
     </div>
   </div>
