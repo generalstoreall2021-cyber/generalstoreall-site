@@ -10,18 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #eeebe2;
-    --surface: #faf8f2;
-    --surface-2: #e4e6da;
-    --ink: #23261f;
-    --ink-soft: #52564a;
-    --line: #d6d0c0;
-    --moss: #3f5a3d;
-    --moss-deep: #2c4129;
-    --hanko: #b23a2e;
-    --hanko-deep: #8f2c22;
-    --max: 1120px;
-    --gap: clamp(64px, 9vw, 128px);
+    --bg: #eeebe2; --surface: #faf8f2; --surface-2: #e4e6da;
+    --ink: #23261f; --ink-soft: #52564a; --line: #d6d0c0;
+    --moss: #3f5a3d; --moss-deep: #2c4129;
+    --hanko: #b23a2e; --hanko-deep: #8f2c22;
+    --max: 1120px; --gap: clamp(64px, 9vw, 128px);
   }
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
@@ -49,7 +42,6 @@
   .eyebrow::before{ content: ""; width: 22px; height: 1px; background: var(--moss-deep); display: inline-block; }
   :focus-visible{ outline: 3px solid var(--hanko); outline-offset: 3px; }
 
-  /* ---------- Header ---------- */
   header{
     position: sticky; top: 0; z-index: 50;
     background: rgba(238,235,226,.88); backdrop-filter: blur(6px);
@@ -78,7 +70,6 @@
   .tel-pill:hover{ background: var(--moss-deep); transform: translateY(-1px); }
   @media (min-width: 960px){ nav.primary-nav{ display: flex; } }
 
-  /* ---------- Hero ---------- */
   .hero{ position: relative; padding: clamp(56px, 10vw, 96px) 0 clamp(48px, 8vw, 80px); overflow: hidden; }
   .hero h1{ font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.4; }
   .hero-sub{ max-width: 42em; font-size: clamp(1rem, 1.6vw, 1.12rem); color: var(--ink-soft); margin: 22px 0 0; }
@@ -98,13 +89,11 @@
   }
   @media (max-width: 859px){ .stamp{ width: 92px; height: 92px; top: 2px; right: 0; } }
 
-  /* ---------- Section shell ---------- */
   section{ padding: var(--gap) 0; }
   .section-head{ max-width: 46em; margin-bottom: 48px; }
   .section-head h2{ font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1.5; }
   .section-head p{ color: var(--ink-soft); margin-top: 16px; font-size: 1rem; }
 
-  /* ---------- Services grid ---------- */
   .services{ background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .service-grid{
     display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line);
@@ -121,7 +110,6 @@
   .service-card h3{ font-size: 1.08rem; }
   .service-card p{ margin: 0; font-size: .88rem; color: var(--ink-soft); }
 
-  /* ---------- Contact ---------- */
   .contact{ text-align: center; }
   .contact h2{ font-size: clamp(1.9rem, 4vw, 2.7rem); }
   .contact .lead{ color: var(--ink-soft); max-width: 34em; margin: 18px auto 0; }
@@ -141,7 +129,6 @@
   .contact-card .value{ font-weight: 700; font-size: 1rem; margin-top: 2px; }
   .stamp-repeat{ width: 92px; margin: 46px auto 0; filter: url(#inkroughen); opacity: .9; }
 
-  /* ---------- Footer ---------- */
   footer{ padding: 40px 0 48px; border-top: 1px solid var(--line); text-align: center; color: var(--ink-soft); font-size: .82rem; }
   footer img{ height: 32px; margin: 0 auto 10px; opacity: .9; }
   footer .fname{ font-family: 'Shippori Mincho', serif; color: var(--ink); font-size: 1rem; margin-bottom: 8px; }
@@ -160,13 +147,13 @@
   <div class="header-inner">
     <a href="index.html" class="logotype"><img src="logo-transparent.png" alt="General Store All"></a>
     <nav class="primary-nav">
-      <a href="fuyouhin-kaishu.html">不用品回収</a>
-      <a href="house-guard.html">ハウスガード</a>
-      <a href="genba-sagyo.html">現場作業</a>
+      <a href="it-web-support.html">IT・Webサポート</a>
       <a href="koritsu-jimu.html">効率事務サポート</a>
       <a href="keiri-shisan.html">経理資産運用</a>
       <a href="kankoku-yushutsu.html">韓国輸出</a>
-      <a href="it-web-support.html">IT・Webサポート</a>
+      <a href="fuyouhin-kaishu.html">不用品回収</a>
+      <a href="house-guard.html">ハウスガード</a>
+      <a href="genba-sagyo.html">現場作業</a>
       <a href="kaisha-gaiyo.html">会社概要</a>
     </nav>
     <a class="tel-pill" href="tel:07085460262">
@@ -191,8 +178,8 @@
       <p class="eyebrow">General Store All</p>
       <h1>暮らしと事業を、<br>まるごとサポート。</h1>
       <p class="hero-sub">
-        不用品回収・買取からハウスガード、現場作業、事務・経理のサポート、韓国輸出、
-        ホームページ制作やITサポートまで。窓口はひとつ、General Store Allが対応します。
+        IT・ホームページ運用から事務・経理サポート、韓国輸出、そして不用品回収・ハウスガード・現場作業まで。
+        窓口はひとつ、General Store Allが対応します。
       </p>
 
       <div class="hero-cta">
@@ -211,22 +198,10 @@
       </div>
 
       <div class="service-grid">
-        <a class="service-card" href="fuyouhin-kaishu.html">
-          <span class="tag">不用品回収・買取</span>
-          <h3>片づけるほど、身軽になる。</h3>
-          <p>家庭からオフィスまで、不用品の回収から買取まで一括対応。</p>
-        </a>
-
-        <a class="service-card" href="house-guard.html">
-          <span class="tag">ハウスガード</span>
-          <h3>害虫も、組立も。</h3>
-          <p>害虫駆除から家具の組立まで対応します。</p>
-        </a>
-
-        <a class="service-card" href="genba-sagyo.html">
-          <span class="tag">現場作業</span>
-          <h3>外構も、解体も、リフォームも。</h3>
-          <p>ユニック・ユンボ・溶接など各種資格を保有し対応します。</p>
+        <a class="service-card" href="it-web-support.html">
+          <span class="tag">IT・WEBサポート</span>
+          <h3>ホームページも、ITの困りごとも。</h3>
+          <p>HP制作・ウェブ制作・ITサポート・AI活用導入をまとめて対応します。</p>
         </a>
 
         <a class="service-card" href="koritsu-jimu.html">
@@ -247,10 +222,22 @@
           <p>輸出販売から輸出代行・コンサルティングまで対応します。</p>
         </a>
 
-        <a class="service-card" href="it-web-support.html">
-          <span class="tag">IT・WEBサポート</span>
-          <h3>ホームページも、ITの困りごとも。</h3>
-          <p>HP制作・ウェブ制作・ITサポートをまとめて対応します。</p>
+        <a class="service-card" href="fuyouhin-kaishu.html">
+          <span class="tag">不用品回収・買取</span>
+          <h3>片づけるほど、身軽になる。</h3>
+          <p>家庭からオフィスまで、不用品の回収から買取まで一括対応。</p>
+        </a>
+
+        <a class="service-card" href="house-guard.html">
+          <span class="tag">ハウスガード</span>
+          <h3>害虫も、組立も。</h3>
+          <p>害虫駆除から家具の組立まで対応します。</p>
+        </a>
+
+        <a class="service-card" href="genba-sagyo.html">
+          <span class="tag">現場作業</span>
+          <h3>外構も、解体も、リフォームも。</h3>
+          <p>ユニック・ユンボ・溶接など各種資格を保有し対応します。</p>
         </a>
 
         <a class="service-card" href="kaisha-gaiyo.html">
@@ -302,7 +289,8 @@
 <footer>
   <div class="wrap">
     <img src="logo-transparent.png" alt="General Store All">
-    <div>不用品回収・ハウスガード・現場作業・事務経理サポート・韓国輸出・IT/Webサポート</div>
+    <div class="fname">General Store All</div>
+    <div>IT/Webサポート・事務経理サポート・韓国輸出・不用品回収・ハウスガード・現場作業</div>
     <div style="margin-top:10px;">&copy; General Store All</div>
   </div>
 </footer>
