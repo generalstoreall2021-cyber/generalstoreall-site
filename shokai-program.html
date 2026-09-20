@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ご紹介プログラム | General Store All</title>
+<meta name="description" content="HP作成管理・ITサポートをご紹介いただいた方への紹介料のご案内。General Store All。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #eeebe2; --surface: #faf8f2; --surface-2: #e4e6da;
+    --ink: #23261f; --ink-soft: #52564a; --line: #d6d0c0;
+    --moss: #3f5a3d; --moss-deep: #2c4129;
+    --hanko: #b23a2e; --hanko-deep: #8f2c22;
+    --max: 1120px; --gap: clamp(64px, 9vw, 128px);
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } *{ transition-duration:.001ms !important; } }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Zen Kaku Gothic New',sans-serif; line-height:1.8; -webkit-font-smoothing:antialiased; }
+  img, svg{ display:block; max-width:100%; }
+  a{ color:inherit; }
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 24px; }
+  h1,h2,h3{ font-family:'Shippori Mincho',serif; font-weight:700; margin:0; letter-spacing:.02em; }
+  .eyebrow{ display:inline-flex; align-items:center; gap:.6em; font-family:'Zen Kaku Gothic New',sans-serif; font-weight:700; font-size:.8rem; letter-spacing:.28em; color:var(--moss-deep); margin:0 0 18px; }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--moss-deep); display:inline-block; }
+  :focus-visible{ outline:3px solid var(--hanko); outline-offset:3px; }
+
+  header{ position:sticky; top:0; z-index:50; background:rgba(238,235,226,.88); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+  .header-inner{ max-width:var(--max); margin:0 auto; padding:12px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .logotype{ display:flex; align-items:center; text-decoration:none; white-space:nowrap; }
+  .logotype img{ height:44px; display:block; }
+  nav.primary-nav{ display:none; gap:20px; font-size:.84rem; font-weight:500; flex-wrap:wrap; }
+  nav.primary-nav a{ text-decoration:none; color:var(--ink-soft); padding-bottom:3px; border-bottom:1px solid transparent; transition:color .2s ease,border-color .2s ease; }
+  nav.primary-nav a:hover{ color:var(--moss-deep); border-color:var(--moss-deep); }
+  .tel-pill{ display:inline-flex; align-items:center; gap:8px; background:var(--moss); color:#fff; text-decoration:none; padding:10px 18px; border-radius:999px; font-weight:700; font-size:.86rem; white-space:nowrap; transition:background .2s ease,transform .2s ease; }
+  .tel-pill:hover{ background:var(--moss-deep); transform:translateY(-1px); }
+  @media (min-width:1080px){ nav.primary-nav{ display:flex; } }
+
+  .breadcrumb{ font-size:.8rem; color:var(--ink-soft); padding:14px 0 0; }
+  .breadcrumb a{ color:var(--moss-deep); text-decoration:none; }
+  .breadcrumb a:hover{ text-decoration:underline; }
+
+  .hero{ position:relative; padding:clamp(56px,10vw,96px) 0 clamp(48px,8vw,64px); text-align:center; }
+  .hero h1{ font-size:clamp(1.9rem,4vw,2.7rem); line-height:1.5; }
+  .hero p{ color:var(--ink-soft); max-width:36em; margin:18px auto 0; }
+  .stamp{ width:100px; margin:0 auto 20px; filter:url(#inkroughen); opacity:.94; }
+
+  section{ padding: 0 0 var(--gap); }
+
+  .plans{ background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:var(--gap) 0; }
+  .plans h2{ text-align:center; color:var(--moss-deep); font-size:1.4rem; margin-bottom:40px; }
+  .plan-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:24px; max-width:820px; margin:0 auto; }
+  .plan-card{ background:var(--bg); border:2px solid var(--moss); border-radius:12px; padding:28px 26px; }
+  .plan-card h3{ color:var(--moss-deep); font-size:1.1rem; margin-bottom:14px; }
+  .plan-card .commission{ font-family:'Shippori Mincho',serif; font-size:1.6rem; color:var(--hanko-deep); font-weight:800; margin-bottom:10px; }
+  .plan-card p{ font-size:.88rem; color:var(--ink-soft); }
+
+  .notes{ padding:var(--gap) 0; }
+  .notes .wrap{ max-width:760px; }
+  .notes-card{ background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:26px 24px; font-size:.88rem; color:var(--ink-soft); }
+  .notes-card p{ margin-bottom:12px; }
+  .notes-card p:last-child{ margin-bottom:0; }
+  .notes-card .flag{ color:var(--hanko-deep); font-weight:700; }
+
+  .contact{ text-align:center; background:var(--surface); border-top:1px solid var(--line); padding:var(--gap) 0; }
+  .contact h2{ font-size:clamp(1.9rem,4vw,2.7rem); }
+  .contact .lead{ color:var(--ink-soft); max-width:34em; margin:18px auto 0; }
+  .contact-grid{ margin:44px auto 0; max-width:760px; display:grid; gap:14px; grid-template-columns:1fr; text-align:left; }
+  @media (min-width:640px){ .contact-grid{ grid-template-columns:1fr 1fr; } }
+  .contact-card{ display:flex; align-items:center; gap:16px; padding:20px 22px; background:var(--bg); border:1px solid var(--line); border-radius:6px; text-decoration:none; color:var(--ink); transition:border-color .2s ease,transform .2s ease; }
+  .contact-card:hover{ border-color:var(--moss); transform:translateY(-2px); }
+  .contact-card .ic{ width:26px; height:26px; color:var(--moss); flex:none; }
+  .contact-card .label{ font-size:.78rem; color:var(--ink-soft); letter-spacing:.05em; }
+  .contact-card .value{ font-weight:700; font-size:1rem; margin-top:2px; word-break:break-all; }
+  .stamp-repeat{ width:92px; margin:46px auto 0; filter:url(#inkroughen); opacity:.9; }
+
+  footer{ padding:40px 0 48px; border-top:1px solid var(--line); text-align:center; color:var(--ink-soft); font-size:.82rem; }
+  footer img{ height:32px; margin:0 auto 10px; opacity:.9; }
+  footer .fname{ font-family:'Shippori Mincho',serif; color:var(--ink); font-size:1rem; margin-bottom:8px; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <filter id="inkroughen" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise" seed="7"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2"/>
+  </filter>
+</svg>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logotype"><img src="logo-transparent.png" alt="General Store All"></a>
+    <nav class="primary-nav">
+      <a href="home-index.html">ホーム</a>
+      <a href="it-web-support.html">IT・Webサポート</a>
+      <a href="koritsu-jimu.html">効率事務サポート</a>
+      <a href="keiri-shisan.html">経理資産運用</a>
+      <a href="kankoku-yushutsu.html">韓国輸出</a>
+      <a href="fuyouhin-kaishu.html">不用品回収</a>
+      <a href="house-guard.html">ハウスガード</a>
+      <a href="genba-sagyo.html">現場作業</a>
+      <a href="kaisha-gaiyo.html">会社概要</a>
+    </nav>
+    <a class="tel-pill" href="tel:07085460262">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      070-8546-0262
+    </a>
+  </div>
+</header>
+<div class="wrap"><div class="breadcrumb"><a href="home-index.html">ホーム</a>　＞　ご紹介プログラム</div></div>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap">
+      <svg class="stamp" viewBox="0 0 128 128" aria-hidden="true">
+        <circle cx="64" cy="64" r="58" fill="none" stroke="#b23a2e" stroke-width="5"/>
+        <circle cx="64" cy="64" r="47" fill="none" stroke="#b23a2e" stroke-width="2"/>
+        <text x="64" y="52" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="17" fill="#b23a2e" font-weight="700">紹介</text>
+        <text x="64" y="86" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="20" fill="#b23a2e" font-weight="800">特典</text>
+      </svg>
+      <p class="eyebrow" style="justify-content:center;">REFERRAL PROGRAM</p>
+      <h1>ご紹介いただいた方に、<br>紹介料をお支払いします。</h1>
+      <p>HP作成管理・ITサポートのご利用者をご紹介いただいた場合、下記の紹介料をお支払いします。</p>
+    </div>
+  </section>
+
+  <section class="plans">
+    <div class="wrap">
+      <h2>紹介料</h2>
+      <div class="plan-grid">
+        <div class="plan-card">
+          <h3>HP作成管理をご紹介の場合</h3>
+          <div class="commission">1,000円<span style="font-size:.9rem;">/月</span></div>
+          <p>ご紹介いただいたお客様が月額料金（10,000円/月）をお支払いいただいている間、その10%を紹介料として毎月お支払いします。</p>
+        </div>
+        <div class="plan-card">
+          <h3>ITサポートをご紹介の場合</h3>
+          <div class="commission">ご利用料金の10%</div>
+          <p>ご紹介いただいたお客様のITサポートご利用料金（月額10,000円または年間120,000円）の10%を紹介料としてお支払いします。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="notes">
+    <div class="wrap">
+      <div class="notes-card">
+        <p><span class="flag">※確認中の項目：</span>HP作成管理の初期費用（50,000円）分が紹介料の対象に含まれるかどうか、現時点で確認が取れていません。含まれる場合は別途お知らせします。</p>
+        <p>LP作成（39,800円・一式）については、現時点で紹介プログラムの対象外です。</p>
+        <p>紹介料のお支払い方法・お支払い時期の詳細は、お問い合わせの際にご案内します。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="wrap">
+      <p class="eyebrow" style="justify-content:center;">お問い合わせ</p>
+      <h2>まずは、<br>お気軽にご相談ください。</h2>
+      <div class="contact-grid">
+        <a class="contact-card" href="tel:07085460262">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div><div class="label">電話</div><div class="value">070-8546-0262</div></div>
+        </a>
+        <a class="contact-card" href="https://lin.ee/C41sTrF" target="_blank" rel="noopener">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <div><div class="label">LINE</div><div class="value">友だち追加で相談</div></div>
+        </a>
+        <a class="contact-card" href="mailto:generalstoreall2021@gmail.com">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+          <div><div class="label">メール</div><div class="value" style="font-size:.86rem;">generalstoreall2021@gmail.com</div></div>
+        </a>
+        <a class="contact-card" href="moshikomi.html">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6M9 11h6M9 19h3"/></svg>
+          <div><div class="label">かんたん申込</div><div class="value">フォームから依頼</div></div>
+        </a>
+      </div>
+      <svg class="stamp-repeat" viewBox="0 0 128 128" aria-hidden="true">
+        <circle cx="64" cy="64" r="58" fill="none" stroke="#b23a2e" stroke-width="5"/>
+        <circle cx="64" cy="64" r="47" fill="none" stroke="#b23a2e" stroke-width="2"/>
+        <text x="64" y="52" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="17" fill="#b23a2e" font-weight="700">相談</text>
+        <text x="64" y="86" text-anchor="middle" font-family="Shippori Mincho, serif" font-size="26" fill="#b23a2e" font-weight="800">無料</text>
+      </svg>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="logo-transparent.png" alt="General Store All">
+    <div class="fname">General Store All</div>
+    <div>ご紹介プログラム／埼玉エリア対応　TEL 070-8546-0262</div>
+    <div style="margin-top:10px;">&copy; General Store All</div>
+    <div style="margin-top:10px; font-size:.76rem;">
+      <a href="privacy.html" style="text-decoration:underline;">個人情報の取り扱いについて</a>　|
+      <a href="tokushoho.html" style="text-decoration:underline;">特定商取引法に基づく表記</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
