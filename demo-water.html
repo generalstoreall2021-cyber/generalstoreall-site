@@ -4,186 +4,234 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>アクアレスキュー川口</title>
-<meta name="description" content="水道修理業者向けデモサイト（架空企業）。制作：generalstoreall">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Murecho:wght@500;800;900&family=Noto+Sans+JP:wght@400;500;700&family=Oswald:wght@500;700&display=swap">
+<meta name="description" content="水道修理業者向けデモサイト（架空企業）。制作：General Store All">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Murecho:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Oswald:wght@500;700&display=swap">
 <style>
-/* Layout: 緊急対応型。電話番号を常に画面内に置き、症状→料金→電話の最短導線 */
+/* Layout: 緊急対応型。巨大な見出し＋電話カード → 症状を選ぶと料金が出るBento → 到着までの時系列 */
 :root{
-  --bg:#f4f8fb; --surface:#ffffff; --ink:#0f1f33; --muted:#526478; --line:#dbe5ee;
-  --blue:#0b4f9c; --deep:#082f5e; --cyan:#19b3e6; --red:#d6332b; --yellow:#ffd23f;
+  --bg:#f2f6fa; --surface:#ffffff; --surface-2:#e6eef6; --ink:#0c1a2b; --muted:#4f6276; --line:#d6e1ec;
+  --blue:#0a56b0; --deep:#072a55; --cyan:#17b0e4; --yellow:#ffd23f; --red:#d8322a; --ok:#20a464;
   --f-display:"Murecho","Hiragino Kaku Gothic StdN","Yu Gothic",sans-serif;
   --f-body:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
-  --f-num:"Oswald","Arial Narrow",sans-serif;
-  color-scheme:light;
+  --f-num:"Oswald","Arial Narrow",sans-serif; --r:20px;
 }
+@media (prefers-color-scheme:dark){:root{
+  --bg:#08111c; --surface:#0f1c2c; --surface-2:#152639; --ink:#e6eef7; --muted:#9db0c4; --line:#1f3349;
+  --blue:#3f8ff0; --deep:#05182f; --cyan:#3cc3f0; --red:#f05a50; --ok:#45c987; color-scheme:dark}}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.75;font-size:16px;padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
-.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3{text-wrap:balance;margin:0}
-h2{font-family:var(--f-display);font-weight:900;font-size:clamp(1.5rem,3.6vw,2.1rem);line-height:1.35}
-:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
-.demo{background:var(--yellow);color:#2a2100;font-size:.8rem;font-weight:700;text-align:center}
-.demo .wrap{padding-block:6px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.8}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;text-wrap:balance;font-family:var(--f-display)}
+h2{font-weight:900;font-size:clamp(1.7rem,3.8vw,2.6rem);line-height:1.3}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.eyebrow{font-family:var(--f-num);letter-spacing:.18em;font-weight:700;font-size:.82rem;color:var(--cyan)}
+.lead{color:var(--muted);margin:0;max-width:38em}
+.demo{background:var(--yellow);color:#2a2100;font-size:.78rem;font-weight:700}
+.demo .wrap{padding-block:6px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;text-align:center}
 .demo a{color:inherit}
-header{background:var(--surface);border-bottom:1px solid var(--line)}
-header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:10px;flex-wrap:wrap}
-.logo{font-family:var(--f-display);font-weight:900;font-size:1.2rem;color:var(--blue);display:flex;align-items:center;gap:8px}
-.logo svg{flex:none}
-.open{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700}
-.dot{width:10px;height:10px;border-radius:50%;background:#2fb46b;box-shadow:0 0 0 4px rgba(47,180,107,.2)}
-.hero{background:linear-gradient(160deg,var(--blue),var(--deep));color:#fff}
-.hero .wrap{padding-block:40px 48px;display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:center}
-.hero h1{font-family:var(--f-display);font-weight:900;font-size:clamp(2rem,6vw,3.5rem);line-height:1.25}
-.hero h1 span{color:var(--yellow)}
-.hero p{color:#d5e5f5;margin:14px 0 0}
-.callbox{background:var(--surface);color:var(--ink);border-radius:10px;padding:22px;display:grid;gap:8px;text-align:center}
-.callbox small{color:var(--muted);font-weight:700}
-.callbox .num{font-family:var(--f-num);font-weight:700;font-size:clamp(2rem,6vw,2.6rem);color:var(--red);letter-spacing:.02em;line-height:1.1}
-.callbox .sub{font-size:.82rem;color:var(--muted)}
-.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.25);margin-top:22px;border-radius:6px;overflow:hidden}
-.facts div{background:rgba(8,47,94,.55);padding:12px;text-align:center}
-.facts b{display:block;font-family:var(--f-num);font-size:1.6rem;color:var(--yellow);line-height:1.1}
-.facts span{font-size:.75rem;color:#d5e5f5}
-section{padding-block:56px}
-.head{display:grid;gap:6px;margin-bottom:24px}
-.eyebrow{font-family:var(--f-num);letter-spacing:.16em;color:var(--cyan);font-weight:700;font-size:.85rem}
-.lead{color:var(--muted);margin:0;max-width:40em}
+header{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;padding-block:10px}
+.logo{display:flex;align-items:center;gap:8px;font-family:var(--f-display);font-weight:900;font-size:1.15rem;color:var(--blue);text-decoration:none}
+.open{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 var(--ok);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 60%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:14px;font:inherit;font-weight:700;text-decoration:none;border:0;cursor:pointer;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-r{background:var(--red);color:#fff}
+.btn-y{background:var(--yellow);color:#2a2100}
+.btn-o{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+
+.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;padding-block:44px 56px;align-items:stretch}
+.hero h1{font-weight:900;font-size:clamp(2.6rem,7.4vw,5.4rem);line-height:1.1;letter-spacing:-.02em}
+.hero h1 span{color:var(--blue)}
+.hero h1 mark{background:none;color:var(--red);position:relative}
+.hero p{color:var(--muted);margin:20px 0 0;max-width:32em}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}
+.facts div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:grid;line-height:1.25}
+.facts b{font-family:var(--f-num);font-size:2rem;color:var(--blue)}
+.facts span{font-size:.76rem;color:var(--muted)}
+.callcard{background:linear-gradient(165deg,var(--blue),var(--deep));color:#fff;border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;min-width:0}
+.callcard svg{width:100%;max-width:340px;height:auto;margin:0 auto;display:block}
+.callcard small{font-weight:700;color:#bcd6f3}
+.callcard .num{font-family:var(--f-num);font-weight:700;font-size:clamp(2.2rem,5vw,3rem);letter-spacing:.02em;line-height:1;color:var(--yellow)}
+.callcard .sub{font-size:.8rem;color:#bcd6f3}
+
+section{padding-block:72px}
+.head{display:grid;gap:10px;margin-bottom:28px}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cell{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.cell h3{font-size:1.15rem}
+.cell p{margin:0;color:var(--muted);font-size:.92rem}
+.c-pick{grid-column:span 3}
+.c-time{grid-column:span 1;background:var(--deep);color:#fff;border-color:transparent}
+.c-time p{color:#bcd6f3}
+.c-time b{font-family:var(--f-num);font-size:3.2rem;line-height:1;color:var(--yellow)}
+.c-promise{grid-column:span 1}
 .picker{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.picker button{font:inherit;font-weight:700;background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:16px 8px;cursor:pointer;display:grid;gap:6px;justify-items:center;color:var(--ink)}
-.picker button svg{width:36px;height:36px}
-.picker button[aria-pressed="true"]{border-color:var(--blue);background:#e8f1fb}
-.answer{margin-top:16px;background:var(--surface);border-left:6px solid var(--blue);border-radius:6px;padding:20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.picker button{font:inherit;font-weight:700;background:var(--surface-2);border:2px solid transparent;border-radius:16px;padding:16px 8px;cursor:pointer;display:grid;gap:8px;justify-items:center;color:var(--ink);transition:border-color .2s,background .2s}
+.picker button svg{width:40px;height:40px}
+.picker button[aria-pressed="true"]{border-color:var(--blue);background:color-mix(in srgb,var(--blue) 12%,var(--surface))}
+.answer{margin-top:auto;border-radius:16px;background:var(--surface-2);padding:20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
 .answer h3{font-size:1.2rem}
-.answer p{margin:6px 0 0;color:var(--muted);font-size:.92rem}
-.answer .price{font-family:var(--f-num);font-weight:700;font-size:1.8rem;color:var(--blue);white-space:nowrap}
-.answer .price small{font-family:var(--f-body);font-size:.75rem;color:var(--muted);display:block;text-align:right}
-.promise{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.promise div{background:var(--surface);padding:22px;border-radius:8px;border:1px solid var(--line)}
-.promise b{display:block;font-size:1.08rem;margin-bottom:6px}
-.promise p{margin:0;color:var(--muted);font-size:.92rem}
+.answer p{margin:4px 0 0}
+.answer .price{font-family:var(--f-num);font-weight:700;font-size:2rem;color:var(--blue);white-space:nowrap;text-align:right;line-height:1.1}
+.answer .price small{display:block;font-family:var(--f-body);font-size:.72rem;color:var(--muted);font-weight:500}
+.ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--cyan) 18%,var(--surface));color:var(--blue)}
+
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.tl::before{content:"";position:absolute;left:0;right:0;top:22px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--blue))}
+.tl div{position:relative;padding:44px 16px 0 0}
+.tl div::before{content:"";position:absolute;left:0;top:13px;width:21px;height:21px;border-radius:50%;background:var(--surface);border:4px solid var(--blue)}
+.tl b{font-family:var(--f-num);font-size:1.6rem;color:var(--blue);display:block;line-height:1}
+.tl strong{display:block;margin:6px 0 2px}
+.tl span{color:var(--muted);font-size:.88rem}
+
+.caution{display:grid;grid-template-columns:1fr 1.4fr;gap:28px;align-items:start}
+.caution ol{margin:0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:c}
+.caution li{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px 16px 58px;position:relative}
+.caution li::before{counter-increment:c;content:"!";position:absolute;left:18px;top:16px;width:26px;height:26px;border-radius:50%;background:var(--yellow);color:#2a2100;font-weight:900;display:grid;place-items:center}
 .area{display:flex;flex-wrap:wrap;gap:8px}
-.area span{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:4px 14px;font-size:.9rem}
-.cmp{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:22px}
-.cmp ul{margin:0;padding-left:1.2em;color:var(--muted)}
-.cmp li+li{margin-top:6px}
-.co dl{display:grid;grid-template-columns:9em 1fr;gap:8px 16px;margin:0;background:var(--surface);padding:22px;border-radius:8px;border:1px solid var(--line)}
-.co dt{color:var(--muted);font-size:.88rem}
-.co dd{margin:0}
-.bar{position:fixed;left:0;right:0;bottom:0;background:var(--red);color:#fff;z-index:30;padding-bottom:env(safe-area-inset-bottom,0px)}
-.bar .wrap{display:flex;align-items:center;justify-content:center;gap:14px;padding-block:10px;flex-wrap:wrap}
-.bar b{font-family:var(--f-num);font-size:1.7rem;letter-spacing:.03em}
+.area span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 16px;font-weight:500}
+.co{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.co div{background:var(--surface);padding:18px 20px;display:grid;gap:2px}
+.co dt{color:var(--muted);font-size:.8rem}
+.co dd{margin:0;font-weight:500}
+footer{padding-block:28px;color:var(--muted);font-size:.82rem}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--red);color:#fff;padding-bottom:env(safe-area-inset-bottom,0px)}
+.bar .wrap{display:flex;align-items:center;justify-content:center;gap:16px;padding-block:10px;flex-wrap:wrap}
+.bar b{font-family:var(--f-num);font-size:1.7rem;letter-spacing:.03em;line-height:1}
 .bar span{font-size:.8rem;font-weight:700}
-footer{background:var(--deep);color:#b9cbe0;font-size:.82rem}
-footer .wrap{padding-block:24px;display:grid;gap:4px}
-@media (max-width:800px){
-  .hero .wrap,.promise{grid-template-columns:1fr}
-  .picker{grid-template-columns:repeat(2,1fr)}
-  .answer{grid-template-columns:1fr}
-  .answer .price small{text-align:left}
-  .co dl{grid-template-columns:1fr}
-  .co dt{margin-top:6px}
+body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+@keyframes rv{from{opacity:.3;transform:translateY(24px)}to{opacity:1;transform:none}}
+@supports (animation-timeline:view()){@media (prefers-reduced-motion:no-preference){.rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% cover 22%}}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dot{animation:none}.btn,.picker button{transition:none}}
+@media (max-width:960px){
+  .hero .wrap,.caution{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr 1fr}
+  .c-pick{grid-column:span 2}
+  .co{grid-template-columns:1fr 1fr}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (max-width:640px){
+  .open span.t{display:none}
+  .picker{grid-template-columns:1fr 1fr}
+  .answer{grid-template-columns:1fr}
+  .answer .price{text-align:left}
+  .facts b{font-size:1.6rem}
+  .tl{grid-template-columns:1fr;gap:18px}
+  .tl::before{left:9px;right:auto;top:0;bottom:0;width:3px;height:auto;background:linear-gradient(180deg,var(--cyan),var(--blue))}
+  .tl div{padding:0 0 0 40px}
+  .tl div::before{top:2px}
+  .co{grid-template-columns:1fr}
+  .bento .cell{grid-column:span 2}
+}
 </style>
 </head>
 <body>
-<div class="demo"><div class="wrap"><span>generalstoreall 制作のデモサイトです。会社名・電話番号・料金はすべて架空の表示例です。</span><a href="demos-index.html">← デモ一覧へ</a></div></div>
+<div class="demo"><div class="wrap"><span>General Store All 制作のデモサイトです。会社名・電話番号・料金はすべて架空の表示例です。</span><a href="demos-index.html">← デモ一覧へ</a></div></div>
 
 <header><div class="wrap">
-  <div class="logo"><svg width="22" height="28" viewBox="0 0 22 28" aria-hidden="true"><path d="M11 1 C11 1 1 13 1 18.5 A10 10 0 0 0 21 18.5 C21 13 11 1 11 1Z" fill="#19b3e6"/></svg>アクアレスキュー川口</div>
-  <div class="open"><span class="dot"></span>本日受付中・年中無休 8:00〜22:00</div>
+  <a class="logo" href="#top"><svg width="22" height="28" viewBox="0 0 22 28" aria-hidden="true"><path d="M11 1 C11 1 1 13 1 18.5 A10 10 0 0 0 21 18.5 C21 13 11 1 11 1Z" fill="#17b0e4"/><path d="M6 19a5 5 0 0 0 5 5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>アクアレスキュー川口</a>
+  <div class="open"><span class="dot"></span><span>本日受付中</span><span class="t">・年中無休 8:00〜22:00</span></div>
 </div></header>
 
+<main id="top">
 <div class="hero"><div class="wrap">
   <div>
-    <h1>水のトラブル、<br><span>最短30分</span>で駆けつけます。</h1>
-    <p>トイレのつまり・水漏れ・蛇口の故障。川口市内なら、お電話から到着までの目安は30分〜1時間です。作業前に必ず料金をお伝えし、ご了承いただいてから作業します。</p>
+    <p class="eyebrow">WATER TROUBLE · KAWAGUCHI</p>
+    <h1>水のトラブル、<br><span>最短<mark>30</mark>分</span>で<br>駆けつけます。</h1>
+    <p>トイレのつまり・水漏れ・蛇口の故障。川口市内なら、お電話から到着までの目安は30分〜1時間です。作業の前に必ず金額をお伝えし、ご了承いただいてから作業します。</p>
     <div class="facts">
       <div><b>30分</b><span>到着目安（表示例）</span></div>
       <div><b>0円</b><span>見積り・出張費（表示例）</span></div>
-      <div><b>365日</b><span>受付</span></div>
+      <div><b>365日</b><span>8:00〜22:00受付</span></div>
     </div>
   </div>
-  <div class="callbox">
+  <div class="callcard">
+    <svg viewBox="0 0 340 200" aria-hidden="true">
+      <rect x="20" y="40" width="190" height="34" rx="10" fill="#e6eef7"/>
+      <rect x="170" y="74" width="40" height="44" rx="6" fill="#e6eef7"/>
+      <rect x="92" y="16" width="44" height="24" rx="6" fill="#bcd6f3"/>
+      <rect x="70" y="8" width="88" height="12" rx="6" fill="#ffd23f"/>
+      <path d="M190 132 C190 132 176 152 176 162 a14 14 0 0 0 28 0 C204 152 190 132 190 132Z" fill="#17b0e4"/>
+      <path d="M190 178 C190 178 183 188 183 192 a7 7 0 0 0 14 0 C197 188 190 178 190 178Z" fill="#17b0e4" opacity=".6"/>
+      <g transform="translate(250 60) rotate(30)"><rect x="-8" y="0" width="16" height="110" rx="8" fill="#ffd23f"/><path d="M-22 -8 a22 22 0 1 0 44 0 l-10 0 l0 14 l-24 0 l0 -14Z" fill="#ffd23f"/></g>
+    </svg>
     <small>お電話一本で手配します</small>
     <div class="num">0120-000-000</div>
     <div class="sub">デモ用の番号です。実際にはつながりません。</div>
+    <a class="btn btn-y" href="#trouble">症状と料金を確認する</a>
   </div>
 </div></div>
 
-<main>
-<section><div class="wrap">
-  <div class="head"><p class="eyebrow">TROUBLE</p><h2>どんな症状ですか？</h2><p class="lead">症状を選ぶと、作業内容と料金の目安を表示します。</p></div>
-  <div class="picker" id="picker">
-    <button type="button" data-k="toilet" aria-pressed="true"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="8" y="4" width="20" height="10" rx="2" fill="#0b4f9c"/><path d="M6 16h24c0 8-5 12-12 12S6 24 6 16Z" fill="#19b3e6"/><rect x="13" y="28" width="10" height="5" fill="#0b4f9c"/></svg>トイレのつまり</button>
-    <button type="button" data-k="leak" aria-pressed="false"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="2" y="8" width="32" height="7" rx="2" fill="#0b4f9c"/><path d="M18 18c0 0-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z" fill="#19b3e6"/></svg>水漏れ</button>
-    <button type="button" data-k="tap" aria-pressed="false"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="4" y="8" width="22" height="7" rx="2" fill="#0b4f9c"/><rect x="20" y="15" width="6" height="8" fill="#0b4f9c"/><rect x="12" y="3" width="6" height="5" fill="#0b4f9c"/><circle cx="23" cy="29" r="3" fill="#19b3e6"/></svg>蛇口の故障</button>
-    <button type="button" data-k="drain" aria-pressed="false"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="#0b4f9c"/><circle cx="18" cy="18" r="9" fill="none" stroke="#19b3e6" stroke-width="2.5"/><path d="M18 9v18M9 18h18" stroke="#19b3e6" stroke-width="2.5"/></svg>排水口のつまり</button>
-  </div>
-  <div class="answer" aria-live="polite">
-    <div><h3 id="aT"></h3><p id="aD"></p></div>
-    <div class="price" id="aP"></div>
+<section id="trouble"><div class="wrap">
+  <div class="head rv"><p class="eyebrow">TROUBLE</p><h2>どんな症状ですか？</h2><p class="lead">症状を選ぶと、作業内容と料金の目安を表示します。</p></div>
+  <div class="bento">
+    <div class="cell c-pick rv">
+      <div class="picker" id="picker">
+        <button type="button" data-k="toilet" aria-pressed="true"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="8" y="4" width="20" height="10" rx="2" fill="currentColor" opacity=".55"/><path d="M6 16h24c0 8-5 12-12 12S6 24 6 16Z" fill="#17b0e4"/><rect x="13" y="28" width="10" height="5" fill="currentColor" opacity=".55"/></svg>トイレのつまり</button>
+        <button type="button" data-k="leak" aria-pressed="false"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="2" y="8" width="32" height="7" rx="2" fill="currentColor" opacity=".55"/><path d="M18 18c0 0-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z" fill="#17b0e4"/></svg>水漏れ</button>
+        <button type="button" data-k="tap" aria-pressed="false"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="4" y="8" width="22" height="7" rx="2" fill="currentColor" opacity=".55"/><rect x="20" y="15" width="6" height="8" fill="currentColor" opacity=".55"/><rect x="12" y="3" width="6" height="5" fill="currentColor" opacity=".55"/><circle cx="23" cy="29" r="3" fill="#17b0e4"/></svg>蛇口の故障</button>
+        <button type="button" data-k="drain" aria-pressed="false"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="currentColor" opacity=".55"/><circle cx="18" cy="18" r="9" fill="none" stroke="#17b0e4" stroke-width="2.5"/><path d="M18 9v18M9 18h18" stroke="#17b0e4" stroke-width="2.5"/></svg>排水口のつまり</button>
+      </div>
+      <div class="answer" aria-live="polite">
+        <div><h3 id="aT"></h3><p id="aD"></p></div>
+        <div class="price" id="aP"></div>
+      </div>
+    </div>
+    <div class="cell c-time rv"><p class="eyebrow">ARRIVAL</p><b>30分</b><p>川口市内の到着目安。混雑時はお電話でお伝えします（表示例）。</p></div>
+    <div class="cell c-promise rv"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12l5 5L20 6"/></svg></div><h3>作業前に金額を確定</h3><p>見積書の金額以外はいただきません。</p></div>
+    <div class="cell rv"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><h3>交換部品をお見せします</h3><p>交換が必要な理由を、外した部品を見せて説明します。</p></div>
+    <div class="cell rv"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></div><h3>作業後の保証</h3><p>同じ箇所の不具合は一定期間、無料で再対応します（期間は表示例）。</p></div>
+    <div class="cell rv"><h3>対応エリア</h3><div class="area"><span>川口市</span><span>蕨市</span><span>戸田市</span><span>さいたま市南区</span><span>さいたま市緑区</span><span>草加市</span></div></div>
   </div>
 </div></section>
 
 <section><div class="wrap">
-  <div class="head"><p class="eyebrow">PROMISE</p><h2>3つのお約束</h2></div>
-  <div class="promise">
-    <div><b>作業前に金額を確定</b><p>見積書に書いた金額以外はいただきません。ご納得いただけない場合はお断りいただけます。</p></div>
-    <div><b>交換部品をお見せします</b><p>交換が必要な理由を、取り外した部品を見せながら説明します。</p></div>
-    <div><b>作業後の保証</b><p>同じ箇所の不具合は、一定期間無料で再対応します（期間は表示例）。</p></div>
+  <div class="head rv"><p class="eyebrow">FLOW</p><h2>お電話から作業完了まで</h2></div>
+  <div class="tl rv">
+    <div><b>00:00</b><strong>お電話</strong><span>症状と住所を伺い、到着時間をお伝えします。</span></div>
+    <div><b>00:30</b><strong>到着・点検</strong><span>原因を調べて、作業内容と金額をご説明します。</span></div>
+    <div><b>00:40</b><strong>ご了承後に作業</strong><span>金額にご納得いただいてから作業を始めます。</span></div>
+    <div><b>01:10</b><strong>完了・お支払い</strong><span>作業箇所を一緒に確認していただきます。</span></div>
   </div>
+  <p class="lead" style="margin-top:18px;font-size:.85rem">※ 時間は一例です（表示例）。</p>
 </div></section>
 
-<section><div class="wrap">
-  <div class="head"><p class="eyebrow">CAUTION</p><h2>業者選びで気をつけたいこと</h2></div>
-  <div class="cmp"><ul>
+<section><div class="wrap caution">
+  <div class="head rv"><p class="eyebrow">CAUTION</p><h2>業者選びで気をつけたいこと</h2><p class="lead">急いでいる時ほど、確認を忘れがちです。</p></div>
+  <ol class="rv">
     <li>広告の「○○円〜」は基本料金だけのことがあります。作業前に総額を確認してください。</li>
     <li>その場で高額な交換工事を急かされたら、即決せず他社にも見積りを依頼してください。</li>
     <li>自治体の「指定給水装置工事事業者」かどうかは、市区町村のホームページで確認できます。</li>
-  </ul></div>
+  </ol>
 </div></section>
 
 <section><div class="wrap">
-  <div class="head"><p class="eyebrow">AREA</p><h2>対応エリア</h2></div>
-  <div class="area"><span>川口市</span><span>蕨市</span><span>戸田市</span><span>さいたま市南区</span><span>さいたま市緑区</span><span>草加市</span><span>東京都北区</span><span>東京都足立区</span></div>
-</div></section>
-
-<section class="co"><div class="wrap">
-  <div class="head"><p class="eyebrow">COMPANY</p><h2>会社概要</h2></div>
-  <dl>
-    <dt>屋号</dt><dd>アクアレスキュー川口（架空）</dd>
-    <dt>所在地</dt><dd>埼玉県川口市○○（表示例）</dd>
-    <dt>指定工事事業者</dt><dd>川口市指定給水装置工事事業者 第○○○号（表示例）</dd>
-    <dt>電話</dt><dd>0120-000-000（デモ番号）</dd>
+  <div class="head rv"><p class="eyebrow">COMPANY</p><h2>会社概要</h2></div>
+  <dl class="co rv">
+    <div><dt>屋号</dt><dd>アクアレスキュー川口（架空）</dd></div>
+    <div><dt>所在地</dt><dd>埼玉県川口市○○（表示例）</dd></div>
+    <div><dt>指定工事事業者</dt><dd>川口市指定 第○○○号（表示例）</dd></div>
+    <div><dt>電話</dt><dd>0120-000-000（デモ番号）</dd></div>
   </dl>
 </div></section>
 </main>
 
-<footer><div class="wrap"><span>© アクアレスキュー川口（架空のデモ企業）</span><span>Website demo by generalstoreall</span></div></footer>
-
-<div class="bar"><div class="wrap"><span>水のトラブル 24時間受付（表示例）</span><b>0120-000-000</b></div></div>
+<footer><div class="wrap"><span>© アクアレスキュー川口（架空のデモ企業）</span><span>Website demo by General Store All</span></div></footer>
+<div class="bar"><div class="wrap"><span>水のトラブル 年中無休 8:00〜22:00受付</span><b>0120-000-000</b></div></div>
 
 <script>
 (function(){
-  const data={
-    toilet:["トイレのつまり","ラバーカップや専用器具で解消します。異物が原因の場合は便器を外して取り出します。","○,○○○円〜"],
-    leak:["水漏れ","給水管・パッキン・接続部のどこから漏れているかを特定してから修理します。","○,○○○円〜"],
-    tap:["蛇口の故障","パッキンやカートリッジの交換で直るか確認し、直らない場合のみ本体交換をご提案します。","○,○○○円〜"],
-    drain:["排水口のつまり","キッチン・浴室・洗面所の排水管を高圧洗浄や専用ワイヤーで清掃します。","○,○○○円〜"]
-  };
-  const btns=[...document.querySelectorAll('#picker button')];
-  function show(k){
-    btns.forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
-    const d=data[k];
-    document.getElementById('aT').textContent=d[0];
-    document.getElementById('aD').textContent=d[1];
-    document.getElementById('aP').innerHTML=d[2]+'<small>料金は表示例です</small>';
-  }
-  btns.forEach(b=>b.addEventListener('click',()=>show(b.dataset.k)));
-  show('toilet');
+  const d={toilet:["トイレのつまり","ラバーカップや専用器具で解消します。異物が原因の場合は便器を外して取り出します。"],leak:["水漏れ","給水管・パッキン・接続部のどこから漏れているかを特定してから修理します。"],tap:["蛇口の故障","パッキンやカートリッジの交換で直るかを先に確認し、直らない場合だけ本体交換をご提案します。"],drain:["排水口のつまり","キッチン・浴室・洗面所の排水管を、高圧洗浄や専用ワイヤーで清掃します。"]};
+  const bs=[...document.querySelectorAll('#picker button')];
+  function show(k){bs.forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));document.getElementById('aT').textContent=d[k][0];document.getElementById('aD').textContent=d[k][1];document.getElementById('aP').innerHTML='○,○○○円〜<small>料金は表示例です</small>'}
+  bs.forEach(b=>b.addEventListener('click',()=>show(b.dataset.k)));show('toilet');
 })();
 </script>
 </body>

@@ -4,176 +4,241 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>てつだい堂</title>
-<meta name="description" content="便利屋向けデモサイト（架空企業）。制作：generalstoreall">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=M+PLUS+2:wght@400;500;700&display=swap">
+<meta name="description" content="便利屋向けデモサイト（架空企業）。制作：General Store All">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=M+PLUS+2:wght@400;500;700;800&display=swap">
 <style>
-/* Layout: メニュー表型。「何を頼めるか」を値札つきのメニューで一覧し、組み合わせ見積りで背中を押す */
+/* Layout: メニュー表型。丸みのある親しみやすさ。Bentoの中にメニュー計算機、店主、できないことを並べる */
 :root{
-  --bg:#eef4f1; --surface:#ffffff; --ink:#1d2b26; --muted:#5a6c65; --line:#d3e1da;
-  --green:#2e7d5b; --green-d:#1f5a41; --mustard:#e2b13c; --tag:#fff3d4;
+  --bg:#edf3ef; --surface:#ffffff; --surface-2:#e2ece6; --ink:#1b2a24; --muted:#56695f; --line:#d0dfd6;
+  --green:#2c7a57; --green-d:#1c533b; --mustard:#e4b23a; --tag:#fff2cf; --coral:#e2725b;
   --f-display:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;
-  --f-body:"M PLUS 2","Hiragino Sans","Yu Gothic",sans-serif;
-  color-scheme:light;
+  --f-body:"M PLUS 2","Hiragino Sans","Yu Gothic",sans-serif; --r:26px;
 }
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0e1612; --surface:#16211b; --surface-2:#1d2b24; --ink:#e6efe9; --muted:#9fb3a8; --line:#283a31;
+  --green:#4fb184; --green-d:#0f2a1e; --mustard:#ecc35c; --tag:#3a3216; --coral:#ee8a74; color-scheme:dark}}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.8;font-size:16px}
-.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3{text-wrap:balance;margin:0;font-family:var(--f-display)}
-h2{font-weight:900;font-size:clamp(1.5rem,3.6vw,2rem)}
-:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
-.demo{background:var(--green-d);color:#fff;font-size:.8rem;font-weight:700;text-align:center}
-.demo .wrap{padding-block:6px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.8}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;text-wrap:balance;font-family:var(--f-display)}
+h2{font-weight:900;font-size:clamp(1.7rem,3.8vw,2.5rem);line-height:1.35}
+:focus-visible{outline:3px solid var(--mustard);outline-offset:3px}
+.lead{color:var(--muted);margin:0;max-width:38em}
+.pill{display:inline-block;font-weight:800;font-size:.78rem;background:var(--tag);color:var(--ink);padding:3px 12px;border-radius:999px;justify-self:start}
+.demo{background:var(--green-d);color:#fff;font-size:.78rem;font-weight:700}
+.demo .wrap{padding-block:6px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;text-align:center}
 .demo a{color:#ffe08a}
-header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:14px;flex-wrap:wrap}
-.logo{font-family:var(--f-display);font-weight:900;font-size:1.4rem;color:var(--green);display:flex;gap:8px;align-items:center}
-.logo i{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--mustard);color:var(--green-d);font-style:normal;font-size:1.1rem}
-.tel{font-weight:700;color:var(--green-d)}
-.tel b{font-size:1.3rem;letter-spacing:.03em}
-.hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:center;padding-block:24px 48px}
-.hero h1{font-weight:900;font-size:clamp(2rem,5.5vw,3.2rem);line-height:1.3}
-.hero h1 mark{background:linear-gradient(transparent 60%,var(--mustard) 60%);color:inherit}
-.hero p{color:var(--muted);margin:14px 0 0}
-.bubbles{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.bubbles span{background:var(--surface);border:2px solid var(--line);border-radius:999px;padding:8px 16px;font-weight:700;font-size:.95rem}
-.bubbles span:nth-child(3n){border-color:var(--mustard)}
-.bubbles span:nth-child(4n){border-color:var(--green);color:var(--green)}
-section{padding-block:52px}
-.head{display:grid;gap:6px;margin-bottom:22px}
-.lead{color:var(--muted);margin:0;max-width:40em}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.tabs button{font:inherit;font-weight:700;border:2px solid var(--green);background:transparent;color:var(--green);border-radius:999px;padding:6px 16px;cursor:pointer}
-.tabs button[aria-pressed="true"]{background:var(--green);color:#fff}
-.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.item{background:var(--surface);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;border:1px solid var(--line)}
-.item input{width:22px;height:22px;accent-color:var(--green)}
-.item b{display:block}
-.item small{color:var(--muted);font-size:.85rem;display:block;line-height:1.5}
-.item .yen{font-weight:700;white-space:nowrap;background:var(--tag);padding:2px 10px;border-radius:6px;font-size:.92rem}
-.total{margin-top:16px;background:var(--green);color:#fff;border-radius:14px;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.total b{font-family:var(--f-display);font-size:1.4rem}
-.total small{display:block;opacity:.85;font-size:.82rem}
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:n}
-.steps li{background:var(--surface);border-radius:12px;padding:18px;border:1px solid var(--line)}
-.steps li::before{counter-increment:n;content:counter(n);display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--mustard);color:var(--green-d);font-weight:900;font-family:var(--f-display);margin-bottom:6px}
-.steps b{display:block}
+header{position:sticky;top:0;z-index:40;padding-top:10px}
+header .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:999px;padding:8px 8px 8px 18px}
+.logo{font-family:var(--f-display);font-weight:900;font-size:1.25rem;color:var(--green);display:flex;gap:8px;align-items:center;text-decoration:none}
+.logo i{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--mustard);color:#1c533b;font-style:normal;font-size:1rem}
+nav{display:flex;gap:20px;font-size:.9rem;font-weight:500}
+nav a{text-decoration:none;color:var(--ink)}
+nav a:hover{color:var(--green)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;font:inherit;font-weight:800;text-decoration:none;border:0;cursor:pointer;transition:transform .2s}
+.btn:hover{transform:translateY(-2px) rotate(-1deg)}
+.btn-g{background:var(--green);color:#fff}
+.btn-m{background:var(--mustard);color:#1c533b}
+.btn-sm{min-height:40px;padding:0 18px;font-size:.88rem}
+
+.hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center;padding-block:48px 40px}
+.hero h1{font-weight:900;font-size:clamp(2.4rem,6.2vw,4.4rem);line-height:1.22}
+.hero h1 mark{background:linear-gradient(transparent 62%,var(--mustard) 62%);color:inherit;padding:0 .05em}
+.hero h1 i{font-style:normal;display:inline-block}
+.hero p{color:var(--muted);margin:20px 0 0;max-width:30em}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.art{min-width:0;position:relative}
+.art svg{width:100%;height:auto;display:block}
+.marquee{overflow:hidden;border-block:1px solid var(--line);background:var(--surface);padding-block:12px;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee div{display:flex;gap:12px;width:max-content;animation:mq 40s linear infinite}
+.marquee span{background:var(--surface-2);border-radius:999px;padding:4px 16px;font-weight:700;font-size:.9rem;white-space:nowrap}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+section{padding-block:72px}
+.head{display:grid;gap:10px;margin-bottom:28px}
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cell{background:var(--surface);border-radius:var(--r);padding:26px;display:flex;flex-direction:column;gap:12px;min-width:0;border:1px solid var(--line)}
+.cell h3{font-size:1.2rem}
+.cell p{margin:0;color:var(--muted);font-size:.92rem}
+.c-menu{grid-column:span 2;grid-row:span 2}
+.c-wide{grid-column:span 2}
+.c-total{background:var(--green);color:#fff;border-color:transparent}
+.c-total b{font-family:var(--f-display);font-size:2.6rem;line-height:1.1}
+.c-total small{opacity:.85}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{font:inherit;font-weight:800;border:0;background:var(--surface-2);color:var(--ink);border-radius:999px;padding:6px 16px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.item{background:var(--surface-2);border-radius:18px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:start;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
+.item:has(input:checked){border-color:var(--green);background:color-mix(in srgb,var(--green) 12%,var(--surface))}
+.item input{width:22px;height:22px;accent-color:var(--green);grid-row:span 2;margin-top:2px}
+.item b{line-height:1.45}
+.item small{color:var(--muted);font-size:.82rem;line-height:1.5}
+.item .yen{grid-column:2;justify-self:start;font-weight:800;background:var(--tag);padding:0 10px;border-radius:8px;font-size:.88rem;margin-top:4px}
+.staff{display:grid;gap:14px;align-content:start}
+.face{width:96px;height:96px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;overflow:hidden}
+.ng ul{margin:0;padding-left:1.2em;color:var(--muted);font-size:.92rem}
+.ng li+li{margin-top:6px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:n}
+.steps li{background:var(--surface);border-radius:var(--r);padding:22px;display:grid;gap:6px;align-content:start;border:1px solid var(--line)}
+.steps li::before{counter-increment:n;content:counter(n);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--mustard);color:#1c533b;font-weight:900;font-family:var(--f-display);font-size:1.2rem}
 .steps span{color:var(--muted);font-size:.88rem}
-.staff{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;background:var(--surface);border-radius:16px;padding:24px;border:1px solid var(--line)}
-.face{width:110px;height:110px;border-radius:50%;background:var(--line);display:grid;place-items:center;color:var(--muted);font-size:.75rem;text-align:center}
-.staff p{margin:6px 0 0;color:var(--muted)}
-.ng{background:var(--surface);border-radius:12px;padding:20px;border:1px dashed var(--muted)}
-.ng ul{margin:0;padding-left:1.2em;color:var(--muted)}
-form{display:grid;gap:12px;background:var(--surface);padding:24px;border-radius:16px;border:1px solid var(--line)}
-form label{display:grid;gap:4px;font-weight:700;font-size:.92rem}
-input[type=text],textarea{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);width:100%;color:var(--ink)}
-.btn{font:inherit;font-weight:700;background:var(--mustard);color:var(--green-d);border:0;border-radius:999px;padding:12px 24px;cursor:pointer;justify-self:start}
-.sent{color:var(--green);font-weight:700;margin:0}
-footer{background:var(--green-d);color:#cfe3d8;font-size:.82rem}
-footer .wrap{padding-block:24px;display:grid;gap:4px}
-@media (max-width:800px){
-  .hero .wrap,.menu{grid-template-columns:1fr}
+.pay{display:flex;gap:8px;flex-wrap:wrap}
+.pay span{border:1.5px dashed var(--line);border-radius:12px;padding:4px 12px;font-size:.85rem;font-weight:700}
+.contact{display:grid;grid-template-columns:1fr 1.1fr;gap:28px;background:var(--surface);border-radius:32px;padding:40px;border:1px solid var(--line)}
+form{display:grid;gap:12px}
+form label{display:grid;gap:4px;font-weight:800;font-size:.9rem}
+input[type=text],textarea{font:inherit;font-weight:400;padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:var(--surface-2);width:100%;color:var(--ink)}
+.sent{color:var(--green);font-weight:800;margin:0}
+footer{padding-block:28px;color:var(--muted);font-size:.82rem}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.mbar{display:none}
+@keyframes rv{from{opacity:.3;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+@supports (animation-timeline:view()){@media (prefers-reduced-motion:no-preference){.rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% cover 22%}}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.marquee div{animation:none;flex-wrap:wrap;width:auto}.btn,.item{transition:none}}
+@media (max-width:960px){
+  nav{display:none}
+  .hero .wrap,.contact{grid-template-columns:1fr}
+  .art{max-width:480px}
+  .bento{grid-template-columns:1fr 1fr}
+  .c-menu{grid-column:span 2;grid-row:auto}
+  .c-pay{grid-column:span 2}
   .steps{grid-template-columns:1fr 1fr}
-  .staff{grid-template-columns:1fr;justify-items:start}
+}
+@media (max-width:640px){
+  .menu{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr}
+  .c-menu,.c-wide,.c-pay{grid-column:auto}
+  .steps{grid-template-columns:1fr}
+  .contact{padding:24px 20px;border-radius:24px}
+  body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+  .mbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px max(12px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line)}
 }
 </style>
 </head>
 <body>
-<div class="demo"><div class="wrap"><span>generalstoreall 制作のデモサイトです。屋号・電話番号・料金はすべて架空の表示例です。</span><a href="demos-index.html">← デモ一覧へ</a></div></div>
+<div class="demo"><div class="wrap"><span>General Store All 制作のデモサイトです。屋号・電話番号・料金はすべて架空の表示例です。</span><a href="demos-index.html">← デモ一覧へ</a></div></div>
 
-<header><div class="wrap">
-  <div class="logo"><i>て</i>てつだい堂</div>
-  <div class="tel">ご相談 <b>048-000-0000</b>（デモ番号）</div>
-</div></header>
+<header><div class="wrap"><div class="bar">
+  <a class="logo" href="#top"><i>て</i>てつだい堂</a>
+  <nav aria-label="メイン"><a href="#menu">メニュー</a><a href="#flow">ご依頼の流れ</a><a href="#contact">お問い合わせ</a></nav>
+  <a class="btn btn-g btn-sm" href="#contact">相談する</a>
+</div></div></header>
 
+<main id="top">
 <div class="hero"><div class="wrap">
   <div>
-    <h1>家の「ちょっと困った」を、<br><mark>まとめて</mark>片付けます。</h1>
-    <p>電球1個の交換から、引っ越し前の不用品の運び出しまで。1件ずつ業者を探さなくても、まとめてお願いできます。川口市・蕨市・戸田市で活動しています。</p>
+    <span class="pill">川口市・蕨市・戸田市</span>
+    <h1><i>家の「ちょっと</i><br><i>困った」を、</i><br><mark>まとめて</mark><i>片付けます。</i></h1>
+    <p>電球1個の交換から、家具の組み立て、庭の草むしりまで。1件ずつ業者を探さなくても、まとめて頼めます。</p>
+    <div class="cta"><a class="btn btn-g" href="#menu">メニューと料金を見る</a><a class="btn btn-m" href="#contact">写真を送って相談</a></div>
   </div>
-  <div class="bubbles" aria-label="ご依頼の多い作業">
-    <span>家具の組み立て</span><span>電球・照明の交換</span><span>庭の草むしり</span><span>網戸の張り替え</span><span>粗大ごみの運び出し</span><span>エアコンの掃除</span><span>棚の取り付け</span><span>買い物の代行</span><span>カーテンレール</span>
+  <div class="art">
+    <svg viewBox="0 0 520 420" role="img" aria-label="工具箱、脚立、電球、植木鉢のイラスト">
+      <circle cx="270" cy="210" r="190" fill="#e4b23a" opacity=".22"/>
+      <circle cx="400" cy="90" r="46" fill="#e2725b" opacity=".85"/>
+      <!-- ladder -->
+      <g stroke="#2c7a57" stroke-width="12" stroke-linecap="round"><path d="M120 380 L190 70"/><path d="M220 380 L250 70"/></g>
+      <g stroke="#2c7a57" stroke-width="8" stroke-linecap="round"><path d="M140 300 L230 300"/><path d="M155 230 L236 230"/><path d="M170 160 L242 160"/><path d="M184 100 L247 100"/></g>
+      <!-- bulb -->
+      <g transform="translate(330 40)"><path d="M0 70 a48 48 0 1 1 96 0 c0 22 -16 32 -20 50 h-56 c-4 -18 -20 -28 -20 -50Z" fill="#fff6d6" stroke="#1b2a24" stroke-width="5"/><rect x="22" y="124" width="52" height="22" rx="6" fill="#9fb3a8" stroke="#1b2a24" stroke-width="5"/><path d="M34 82 l14 18 l14 -18" fill="none" stroke="#e4b23a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <!-- toolbox -->
+      <g transform="translate(250 262)"><rect x="0" y="34" width="210" height="104" rx="16" fill="#e2725b" stroke="#1b2a24" stroke-width="5"/><path d="M70 34 v-20 a10 10 0 0 1 10 -10 h50 a10 10 0 0 1 10 10 v20" fill="none" stroke="#1b2a24" stroke-width="7"/><rect x="0" y="66" width="210" height="10" fill="#1b2a24"/><rect x="92" y="60" width="26" height="22" rx="4" fill="#e4b23a" stroke="#1b2a24" stroke-width="4"/><g transform="translate(150 -10) rotate(20)"><rect x="-5" y="0" width="10" height="56" rx="4" fill="#9fb3a8" stroke="#1b2a24" stroke-width="4"/><rect x="-16" y="-14" width="32" height="18" rx="4" fill="#2c7a57" stroke="#1b2a24" stroke-width="4"/></g></g>
+      <!-- plant -->
+      <g transform="translate(40 300)"><path d="M10 40 h60 l-8 56 h-44Z" fill="#c98b5a" stroke="#1b2a24" stroke-width="5"/><path d="M40 40 C40 10 20 0 4 4 C10 24 24 34 40 40Z M40 40 C40 6 62 -6 78 0 C72 22 56 34 40 40Z" fill="#2c7a57" stroke="#1b2a24" stroke-width="4"/></g>
+    </svg>
   </div>
 </div></div>
 
-<main>
-<section><div class="wrap">
-  <div class="head"><h2>作業メニューと料金</h2><p class="lead">頼みたい作業にチェックを入れると、合計の目安を計算します。料金はデモ用の表示例です。</p></div>
-  <div class="tabs" id="tabs">
-    <button type="button" data-c="all" aria-pressed="true">すべて</button>
-    <button type="button" data-c="in" aria-pressed="false">家の中</button>
-    <button type="button" data-c="out" aria-pressed="false">庭・屋外</button>
-    <button type="button" data-c="move" aria-pressed="false">運び出し</button>
-  </div>
-  <div class="menu" id="menu">
-    <label class="item" data-c="in"><input type="checkbox" id="m1" data-p="3000"><span><b>電球・照明器具の交換</b><small>1か所あたり。高所や吹き抜けは要相談</small></span><span class="yen">3,000円</span></label>
-    <label class="item" data-c="in"><input type="checkbox" id="m2" data-p="5000"><span><b>家具の組み立て</b><small>カラーボックス・棚など1点</small></span><span class="yen">5,000円〜</span></label>
-    <label class="item" data-c="in"><input type="checkbox" id="m3" data-p="4000"><span><b>網戸の張り替え</b><small>1枚あたり、網代込み</small></span><span class="yen">4,000円</span></label>
-    <label class="item" data-c="in"><input type="checkbox" id="m4" data-p="6000"><span><b>棚・手すりの取り付け</b><small>下地の確認を含む</small></span><span class="yen">6,000円〜</span></label>
-    <label class="item" data-c="out"><input type="checkbox" id="m5" data-p="8000"><span><b>庭の草むしり</b><small>10㎡あたりの目安</small></span><span class="yen">8,000円〜</span></label>
-    <label class="item" data-c="out"><input type="checkbox" id="m6" data-p="5000"><span><b>雨樋・ベランダの掃除</b><small>2階建てまで</small></span><span class="yen">5,000円〜</span></label>
-    <label class="item" data-c="move"><input type="checkbox" id="m7" data-p="7000"><span><b>家具の移動・運び出し</b><small>作業員2名・30分まで</small></span><span class="yen">7,000円〜</span></label>
-    <label class="item" data-c="move"><input type="checkbox" id="m8" data-p="4000"><span><b>粗大ごみの搬出</b><small>集積所までの運び出し。処分は自治体へ</small></span><span class="yen">4,000円〜</span></label>
-  </div>
-  <div class="total" aria-live="polite">
-    <div><small>選んだ作業の合計（目安）</small><b id="sum">0円</b></div>
-    <div><small id="cnt">作業を選んでください</small><small>出張費：市内無料（表示例）</small></div>
+<div class="marquee" aria-label="ご依頼の多い作業"><div>
+  <span>家具の組み立て</span><span>電球・照明の交換</span><span>庭の草むしり</span><span>網戸の張り替え</span><span>粗大ごみの運び出し</span><span>雨樋の掃除</span><span>棚の取り付け</span><span>家具の移動</span><span>手すりの取り付け</span>
+  <span aria-hidden="true">家具の組み立て</span><span aria-hidden="true">電球・照明の交換</span><span aria-hidden="true">庭の草むしり</span><span aria-hidden="true">網戸の張り替え</span><span aria-hidden="true">粗大ごみの運び出し</span><span aria-hidden="true">雨樋の掃除</span><span aria-hidden="true">棚の取り付け</span><span aria-hidden="true">家具の移動</span><span aria-hidden="true">手すりの取り付け</span>
+</div></div>
+
+<section id="menu"><div class="wrap">
+  <div class="head rv"><h2>メニューと料金</h2><p class="lead">頼みたい作業にチェックを入れると、合計の目安を計算します。料金はデモ用の表示例です。</p></div>
+  <div class="bento">
+    <div class="cell c-menu rv">
+      <div class="tabs" id="tabs">
+        <button type="button" data-c="all" aria-pressed="true">すべて</button>
+        <button type="button" data-c="in" aria-pressed="false">家の中</button>
+        <button type="button" data-c="out" aria-pressed="false">庭・屋外</button>
+        <button type="button" data-c="move" aria-pressed="false">運び出し</button>
+      </div>
+      <div class="menu" id="menuList">
+        <label class="item" data-c="in"><input type="checkbox" id="m1" data-p="3000"><b>電球・照明器具の交換</b><small>1か所。高所・吹き抜けは要相談</small><span class="yen">3,000円</span></label>
+        <label class="item" data-c="in"><input type="checkbox" id="m2" data-p="5000"><b>家具の組み立て</b><small>カラーボックス・棚など1点</small><span class="yen">5,000円〜</span></label>
+        <label class="item" data-c="in"><input type="checkbox" id="m3" data-p="4000"><b>網戸の張り替え</b><small>1枚、網代込み</small><span class="yen">4,000円</span></label>
+        <label class="item" data-c="in"><input type="checkbox" id="m4" data-p="6000"><b>棚・手すりの取り付け</b><small>下地の確認を含む</small><span class="yen">6,000円〜</span></label>
+        <label class="item" data-c="out"><input type="checkbox" id="m5" data-p="8000"><b>庭の草むしり</b><small>10㎡あたりの目安</small><span class="yen">8,000円〜</span></label>
+        <label class="item" data-c="out"><input type="checkbox" id="m6" data-p="5000"><b>雨樋・ベランダの掃除</b><small>2階建てまで</small><span class="yen">5,000円〜</span></label>
+        <label class="item" data-c="move"><input type="checkbox" id="m7" data-p="7000"><b>家具の移動</b><small>作業員2名・30分まで</small><span class="yen">7,000円〜</span></label>
+        <label class="item" data-c="move"><input type="checkbox" id="m8" data-p="4000"><b>粗大ごみの運び出し</b><small>家の中から玄関先まで。収集は自治体へお申し込みください</small><span class="yen">4,000円〜</span></label>
+      </div>
+    </div>
+    <div class="cell c-total rv" aria-live="polite">
+      <small>選んだ作業の合計（目安）</small>
+      <b id="sum">0円</b>
+      <small id="cnt">作業を選んでください</small>
+      <small>出張費：対応エリア内は無料（表示例）</small>
+    </div>
+    <div class="cell staff rv">
+      <div class="face"><svg viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="40" r="18" fill="#9fb3a8"/><path d="M14 96 c4 -24 18 -34 34 -34 s30 10 34 34Z" fill="#9fb3a8"/></svg></div>
+      <h3>店主あいさつ（掲載例）</h3>
+      <p>便利屋は「誰が来るか」で選ばれます。実際のサイトでは、店主の顔写真と経歴、人柄が伝わる文章を載せます。</p>
+    </div>
+    <div class="cell ng c-wide rv">
+      <span class="pill">お引き受けできない作業</span>
+      <ul>
+        <li>電気工事士などの資格や自治体の指定が必要な工事（配線工事・給水管工事など）は行いません。</li>
+        <li>家庭ごみ・粗大ごみの収集運搬・処分は行いません。自治体の収集をご利用ください。</li>
+      </ul>
+    </div>
+    <div class="cell c-pay rv">
+      <h3>お支払い方法</h3>
+      <div class="pay"><span>現金</span><span>振込</span><span>QR決済</span></div>
+      <p>作業が終わってからのお支払いです（表示例）。</p>
+    </div>
   </div>
 </div></section>
 
-<section><div class="wrap">
-  <div class="head"><h2>ご依頼の流れ</h2></div>
-  <ol class="steps">
+<section id="flow"><div class="wrap">
+  <div class="head rv"><h2>ご依頼の流れ</h2></div>
+  <ol class="steps rv">
     <li><b>お問い合わせ</b><span>電話かフォームで、困りごとをそのままお伝えください。</span></li>
-    <li><b>お見積り</b><span>写真を送っていただければ、その場で金額をお伝えします。</span></li>
+    <li><b>お見積り</b><span>写真を送っていただければ、金額をお伝えします。</span></li>
     <li><b>作業</b><span>ご都合のよい日時にお伺いします。</span></li>
-    <li><b>お支払い</b><span>作業後に現金・振込・QR決済で。</span></li>
+    <li><b>お支払い</b><span>作業を確認していただいてからお支払いです。</span></li>
   </ol>
 </div></section>
 
-<section><div class="wrap">
-  <div class="staff">
-    <div class="face">店主の写真<br>（制作時に差し替え）</div>
-    <div><h3>店主あいさつ（掲載例）</h3><p>ここには店主の経歴と、どんな気持ちで仕事をしているかを書きます。便利屋は「誰が来るか」で選ばれるので、顔写真と人柄が伝わる文章が一番の安心材料になります。</p></div>
+<section id="contact"><div class="wrap">
+  <div class="contact rv">
+    <div><h2>写真を送って、<br>気軽にご相談ください。</h2><p class="lead" style="margin-top:12px">「これ頼めるかな？」という段階で大丈夫です。</p><p class="lead" style="margin-top:16px">ご相談 048-000-0000（デモ番号）</p></div>
+    <form id="f" novalidate>
+      <label for="nm">お名前<input type="text" id="nm" autocomplete="off" placeholder="例）蕨 花子"></label>
+      <label for="ms">困っていること<textarea id="ms" rows="4" placeholder="例）寝室の照明が届かなくて交換できない"></textarea></label>
+      <button class="btn btn-g" type="submit">送る</button>
+      <p class="sent" id="sent" hidden>デモのため送信はされません。</p>
+    </form>
   </div>
-</div></section>
-
-<section><div class="wrap">
-  <div class="ng"><h3>お引き受けできない作業</h3><ul>
-    <li>電気工事士や水道工事の資格が必要な工事（配線工事など）は、提携する有資格の業者をご紹介します。</li>
-    <li>家庭ごみ・粗大ごみの収集運搬・処分は行いません。自治体の収集をご利用ください。</li>
-  </ul></div>
-</div></section>
-
-<section><div class="wrap">
-  <form id="f" novalidate>
-    <h2>お問い合わせ</h2>
-    <label for="nm">お名前<input type="text" id="nm" autocomplete="off" placeholder="例）蕨 花子"></label>
-    <label for="ms">困っていること<textarea id="ms" rows="3" placeholder="例）寝室の照明が届かなくて交換できない"></textarea></label>
-    <button class="btn" type="submit">送る</button>
-    <p class="sent" id="sent" hidden>デモのため送信はされません。</p>
-  </form>
 </div></section>
 </main>
 
-<footer><div class="wrap"><span>© てつだい堂（架空のデモ屋号）</span><span>Website demo by generalstoreall</span></div></footer>
+<footer><div class="wrap"><span>© てつだい堂（架空のデモ屋号）</span><span>Website demo by General Store All</span></div></footer>
+<div class="mbar"><a class="btn btn-m" href="#menu">料金を見る</a><a class="btn btn-g" href="#contact">相談する</a></div>
 
 <script>
 (function(){
-  const items=[...document.querySelectorAll('#menu .item')];
-  const boxes=items.map(i=>i.querySelector('input'));
-  function calc(){
-    let s=0,n=0;
-    boxes.forEach(b=>{if(b.checked){s+=+b.dataset.p;n++}});
-    document.getElementById('sum').textContent=s.toLocaleString('ja-JP')+'円〜';
-    document.getElementById('cnt').textContent=n?n+'件の作業をまとめて依頼':'作業を選んでください';
-    if(!n)document.getElementById('sum').textContent='0円';
-  }
+  const items=[...document.querySelectorAll('#menuList .item')],boxes=items.map(i=>i.querySelector('input'));
+  function calc(){let s=0,n=0;boxes.forEach(b=>{if(b.checked){s+=+b.dataset.p;n++}});document.getElementById('sum').textContent=n?s.toLocaleString('ja-JP')+'円〜':'0円';document.getElementById('cnt').textContent=n?n+'件の作業をまとめて依頼':'作業を選んでください'}
   boxes.forEach(b=>b.addEventListener('change',calc));
   const tabs=[...document.querySelectorAll('#tabs button')];
-  tabs.forEach(t=>t.addEventListener('click',()=>{
-    tabs.forEach(x=>x.setAttribute('aria-pressed',x===t));
-    items.forEach(i=>{i.hidden=!(t.dataset.c==='all'||i.dataset.c===t.dataset.c)});
-  }));
+  tabs.forEach(t=>t.addEventListener('click',()=>{tabs.forEach(x=>x.setAttribute('aria-pressed',x===t));items.forEach(i=>{i.hidden=!(t.dataset.c==='all'||i.dataset.c===t.dataset.c)})}));
   document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();document.getElementById('sent').hidden=false});
 })();
 </script>
