@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ひだまり訪問あん摩</title>
+<meta name="description" content="訪問マッサージ向けデモサイト（架空）。広告規制を考慮した構成。制作：generalstoreall">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@700&display=swap">
+<style>
+/* Layout: 高齢のご本人とご家族が読む前提。大きな文字・高コントラスト・1カラムで、広告できる事項だけを並べる */
+:root{
+  --bg:#f5f7f6; --surface:#ffffff; --ink:#1a2421; --muted:#4f5e59; --line:#cfdad5;
+  --sage:#3f6f62; --sage-l:#e2ece8; --sun:#d98f2b; --sun-l:#fbefdc;
+  --f-display:"BIZ UDPMincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-body:"BIZ UDPGothic","Hiragino Sans","Yu Gothic",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:18px;line-height:1.9}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;margin:0;font-family:var(--f-display)}
+h2{font-size:clamp(1.5rem,3.6vw,1.9rem);color:var(--sage)}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.demo{background:var(--sun);color:#2a1a02;font-size:.82rem;font-weight:700;text-align:center}
+.demo .wrap{max-width:1040px;padding-block:6px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.demo a{color:inherit}
+header{background:var(--surface);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:16px;flex-wrap:wrap}
+.logo{font-family:var(--f-display);font-size:1.35rem;color:var(--sage);display:flex;gap:10px;align-items:center}
+.logo svg{flex:none}
+.size{display:flex;gap:6px;align-items:center;font-size:.85rem}
+.size button{font:inherit;font-weight:700;border:2px solid var(--sage);background:var(--surface);color:var(--sage);border-radius:6px;padding:2px 10px;cursor:pointer;min-width:44px;min-height:40px}
+.size button[aria-pressed="true"]{background:var(--sage);color:#fff}
+.hero{background:var(--sage-l)}
+.hero .wrap{padding-block:48px}
+.hero h1{font-size:clamp(1.9rem,5.4vw,2.8rem);line-height:1.45;color:var(--ink)}
+.hero p{margin:16px 0 0;color:var(--muted)}
+.telbig{margin-top:24px;background:var(--surface);border:2px solid var(--sage);border-radius:12px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.telbig b{font-size:clamp(1.7rem,5vw,2.2rem);letter-spacing:.04em;color:var(--sage)}
+.telbig span{font-size:.9rem;color:var(--muted)}
+section{padding-block:48px;border-bottom:1px solid var(--line)}
+.head{margin-bottom:20px}
+.info{display:grid;gap:12px}
+.info div{background:var(--surface);border-radius:10px;padding:18px 22px;display:grid;grid-template-columns:8em 1fr;gap:12px;border:1px solid var(--line)}
+.info dt{color:var(--muted);font-weight:700}
+.info dd{margin:0}
+.week{overflow-x:auto;background:var(--surface);border-radius:10px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:520px;text-align:center}
+th,td{padding:12px 8px;border-bottom:1px solid var(--line)}
+th{font-weight:700;background:var(--sage-l)}
+td.on{color:var(--sage);font-weight:700}
+td.off{color:#9aa6a1}
+tr:last-child td{border-bottom:0}
+.note{color:var(--muted);font-size:.92rem;margin:10px 0 0}
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:f}
+.flow li{background:var(--surface);border-radius:10px;padding:18px 22px 18px 72px;position:relative;border:1px solid var(--line)}
+.flow li::before{counter-increment:f;content:counter(f);position:absolute;left:20px;top:18px;width:36px;height:36px;border-radius:50%;background:var(--sun-l);color:var(--sun);font-weight:700;display:grid;place-items:center;font-size:1.1rem}
+.flow b{display:block}
+.flow span{color:var(--muted);font-size:.95rem}
+.staff{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;background:var(--surface);border-radius:12px;padding:24px;border:1px solid var(--line)}
+.face{width:120px;height:120px;border-radius:50%;background:var(--sage-l);display:grid;place-items:center;text-align:center;font-size:.78rem;color:var(--muted)}
+.staff p{margin:6px 0 0;color:var(--muted)}
+footer{background:var(--sage);color:#e2ece8;font-size:.88rem}
+footer .wrap{padding-block:24px;display:grid;gap:4px}
+@media (max-width:640px){
+  .info div{grid-template-columns:1fr;gap:2px}
+  .staff{grid-template-columns:1fr;justify-items:start}
+}
+</style>
+</head>
+<body>
+<div class="demo"><div class="wrap"><span>generalstoreall 制作のデモサイトです。名称・氏名・電話番号はすべて架空の表示例です。</span><a href="demos-index.html">← デモ一覧へ</a></div></div>
+
+<header><div class="wrap">
+  <div class="logo"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="7" fill="#d98f2b"/><g stroke="#d98f2b" stroke-width="2.5" stroke-linecap="round"><path d="M15 2v4M15 24v4M2 15h4M24 15h4M5.8 5.8l2.8 2.8M21.4 21.4l2.8 2.8M5.8 24.2l2.8-2.8M21.4 8.6l2.8-2.8"/></g></svg>ひだまり訪問あん摩</div>
+  <div class="size" role="group" aria-label="文字の大きさ">文字の大きさ
+    <button type="button" data-s="18" aria-pressed="true">標準</button>
+    <button type="button" data-s="21" aria-pressed="false">大</button>
+  </div>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <h1>ご自宅や施設へ<br>お伺いして施術します。</h1>
+  <p>あん摩マッサージ指圧師が、ご自宅・高齢者施設へ出張して施術を行います。通院が難しい方、ご家族の方からのご相談もお受けしています。</p>
+  <div class="telbig"><b>048-000-0000</b><span>受付 平日9:00〜18:00（デモ番号）</span></div>
+</div></div>
+
+<main>
+<section><div class="wrap">
+  <div class="head"><h2>施術所のご案内</h2></div>
+  <dl class="info">
+    <div><dt>名称</dt><dd>ひだまり訪問あん摩（架空）</dd></div>
+    <div><dt>業務の種類</dt><dd>あん摩・マッサージ・指圧</dd></div>
+    <div><dt>施術者</dt><dd>山田 一郎（あん摩マッサージ指圧師）※架空の氏名</dd></div>
+    <div><dt>所在地</dt><dd>埼玉県川口市○○（表示例）</dd></div>
+    <div><dt>出張施術</dt><dd>川口市・蕨市・戸田市のご自宅、高齢者施設へ出張します</dd></div>
+    <div><dt>予約</dt><dd>予約制です。お電話でご予約ください</dd></div>
+  </dl>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><h2>施術日と時間</h2></div>
+  <div class="week"><table>
+    <thead><tr><th>時間</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th><th>日</th></tr></thead>
+    <tbody>
+      <tr><th>9:00〜12:00</th><td class="on">○</td><td class="on">○</td><td class="on">○</td><td class="on">○</td><td class="on">○</td><td class="on">○</td><td class="off">休</td></tr>
+      <tr><th>13:00〜18:00</th><td class="on">○</td><td class="on">○</td><td class="off">休</td><td class="on">○</td><td class="on">○</td><td class="off">休</td><td class="off">休</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">祝日は休みです（表示例）。</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><h2>ご利用の流れ</h2></div>
+  <ol class="flow">
+    <li><b>お電話でご相談</b><span>ご本人でもご家族でも構いません。お住まいの地域と、ご希望の曜日を伺います。</span></li>
+    <li><b>日時の調整</b><span>出張できる日時をご案内します。</span></li>
+    <li><b>ご自宅・施設へお伺い</b><span>施術者がお伺いし、施術を行います。</span></li>
+  </ol>
+</div></section>
+
+<section><div class="wrap">
+  <div class="staff">
+    <div class="face">施術者の写真<br>（制作時に差し替え）</div>
+    <div><h3>施術者の紹介</h3><p>氏名と、あん摩マッサージ指圧師の資格を掲載する欄です。掲載できる内容は法令とガイドラインで決まっているため、制作時に確認しながら作成します。</p></div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>© ひだまり訪問あん摩（架空のデモ施術所）</span><span>Website demo by generalstoreall</span></div></footer>
+
+<script>
+(function(){
+  const bs=[...document.querySelectorAll('.size button')];
+  bs.forEach(b=>b.addEventListener('click',()=>{
+    document.body.style.fontSize=b.dataset.s+'px';
+    bs.forEach(x=>x.setAttribute('aria-pressed',x===b));
+  }));
+})();
+</script>
+</body>
+</html>

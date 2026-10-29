@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>木と灰リフォーム</title>
+<meta name="description" content="リフォーム・工務店向けデモサイト（架空企業）。制作：generalstoreall">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@600;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: 施工事例ギャラリー型。事例を場所別に絞り込み、図面の寸法表記をモチーフに */
+:root{
+  --bg:#fafaf8; --surface:#ffffff; --ink:#22262a; --muted:#646b72; --line:#e2e3e0;
+  --char:#2b3035; --teal:#2f6f73; --teal-l:#e1eeee; --wood:#b4834f;
+  --f-display:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.8;font-size:16px}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;margin:0;font-family:var(--f-display)}
+h2{font-weight:900;font-size:clamp(1.5rem,3.6vw,2.2rem)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.demo{background:var(--char);color:#fff;font-size:.8rem;font-weight:700;text-align:center}
+.demo .wrap{padding-block:6px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.demo a{color:#9fd3d6}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:18px;flex-wrap:wrap}
+.logo{font-family:var(--f-display);font-weight:900;font-size:1.4rem;letter-spacing:.06em}
+nav{display:flex;gap:18px;font-size:.92rem;flex-wrap:wrap}
+nav a{color:var(--ink);text-decoration:none}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:36px;align-items:center;padding-block:28px 56px}
+.hero h1{font-weight:900;font-size:clamp(2rem,4.6vw,3.2rem);line-height:1.3}
+.hero h1 span{display:inline-block}
+.hero p{color:var(--muted);margin:16px 0 0;max-width:30em}
+.dim{font-family:var(--f-mono);font-size:.78rem;color:var(--teal);letter-spacing:.06em}
+.plan{position:relative;aspect-ratio:4/3;max-width:100%;background:var(--surface);border:1px solid var(--line)}
+.plan canvas{width:100%;height:100%;display:block}
+section{padding-block:56px}
+.head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.filter{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.filter button{font:inherit;background:none;border:0;border-bottom:3px solid transparent;padding:8px 14px;cursor:pointer;color:var(--muted);font-weight:500}
+.filter button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--teal);font-weight:700}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.work{display:grid;gap:10px;align-content:start}
+.img{aspect-ratio:4/3;max-width:100%;position:relative;overflow:hidden}
+.img span{position:absolute;left:10px;bottom:8px;font-family:var(--f-mono);font-size:.72rem;color:#fff;background:rgba(0,0,0,.45);padding:2px 6px}
+.k1{background:linear-gradient(180deg,#d9d4ca 0 55%,#8d6b48 55% 62%,#ece9e3 62%)}
+.k2{background:linear-gradient(90deg,#cfd8da 0 30%,#f1f1ee 30% 70%,#cfd8da 70%)}
+.k3{background:linear-gradient(180deg,#9fb4b8 0 20%,#e6e3dc 20% 80%,#6f7a7f 80%)}
+.k4{background:linear-gradient(135deg,#c4a57d 0 50%,#ded6c8 50%)}
+.k5{background:linear-gradient(180deg,#566169 0 70%,#2f6f73 70%)}
+.k6{background:linear-gradient(90deg,#e8e3da 0 60%,#b4834f 60%)}
+.work h3{font-size:1.1rem}
+.meta{display:flex;gap:12px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--char)}
+.why div{padding:22px 22px 22px 0;border-right:1px solid var(--line)}
+.why div+div{padding-left:22px}
+.why div:last-child{border-right:0}
+.why b{display:block;font-family:var(--f-display);font-size:1.2rem;margin-bottom:6px}
+.why p{margin:0;color:var(--muted);font-size:.92rem}
+.band{background:var(--char);color:#fff}
+.band .wrap{padding-block:48px;display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
+.band p{color:#c9cfd4;margin:10px 0 0}
+.band .btn{justify-self:end;background:var(--teal);color:#fff;text-decoration:none;font-weight:700;padding:14px 28px}
+.co dl{display:grid;grid-template-columns:10em 1fr;gap:10px 20px;margin:0}
+.co dt{color:var(--muted);font-size:.9rem}
+.co dd{margin:0}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.82rem}
+footer .wrap{padding-block:24px;display:grid;gap:4px}
+@media (max-width:860px){
+  .hero .wrap,.band .wrap{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr}
+  .why{grid-template-columns:1fr}
+  .why div,.why div+div{padding:18px 0;border-right:0;border-bottom:1px solid var(--line)}
+  .band .btn{justify-self:start}
+  .co dl{grid-template-columns:1fr;gap:2px}
+  .co dd{margin-bottom:8px}
+}
+@media (max-width:520px){.gallery{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="demo"><div class="wrap"><span>generalstoreall 制作のデモサイトです。会社名・施工事例・許可番号はすべて架空の表示例です。</span><a href="demos-index.html">← デモ一覧へ</a></div></div>
+
+<header><div class="wrap">
+  <div class="logo">木と灰リフォーム</div>
+  <nav><a href="#works">施工事例</a><a href="#why">選ばれる理由</a><a href="#company">会社概要</a></nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div>
+    <p class="dim">KITCHEN · BATH · EXTERIOR · KAWAGUCHI</p>
+    <h1><span>暮らしの</span><span>寸法から、</span><br><span>考える</span><span>リフォーム。</span></h1>
+    <p>キッチンの高さ、廊下の幅、手すりの位置。毎日使う場所だからこそ、ご家族の身長や動き方を測ってから設計します。</p>
+  </div>
+  <div class="plan"><canvas id="plan" aria-label="間取り図のイメージ。LDKと水回りに寸法線が入っている" role="img"></canvas></div>
+</div></div>
+
+<main>
+<section id="works"><div class="wrap">
+  <div class="head"><h2>施工事例</h2>
+    <div class="filter" id="filter">
+      <button type="button" data-c="all" aria-pressed="true">すべて</button>
+      <button type="button" data-c="kitchen" aria-pressed="false">キッチン</button>
+      <button type="button" data-c="bath" aria-pressed="false">浴室・洗面</button>
+      <button type="button" data-c="ext" aria-pressed="false">外壁・屋根</button>
+      <button type="button" data-c="whole" aria-pressed="false">全面改装</button>
+    </div>
+  </div>
+  <div class="gallery" id="gallery">
+    <article class="work" data-c="kitchen"><div class="img k1"><span>PHOTO 制作時に差し替え</span></div><h3>壁付けから対面式キッチンへ</h3><div class="meta"><span>川口市</span><span>築28年</span><span>工期 12日</span></div></article>
+    <article class="work" data-c="bath"><div class="img k2"><span>PHOTO 制作時に差し替え</span></div><h3>在来浴室をユニットバスに</h3><div class="meta"><span>蕨市</span><span>築35年</span><span>工期 5日</span></div></article>
+    <article class="work" data-c="ext"><div class="img k3"><span>PHOTO 制作時に差し替え</span></div><h3>外壁の塗り替えとシーリング打ち替え</h3><div class="meta"><span>戸田市</span><span>築18年</span><span>工期 14日</span></div></article>
+    <article class="work" data-c="whole"><div class="img k4"><span>PHOTO 制作時に差し替え</span></div><h3>中古戸建ての全面改装</h3><div class="meta"><span>さいたま市</span><span>築40年</span><span>工期 60日</span></div></article>
+    <article class="work" data-c="bath"><div class="img k5"><span>PHOTO 制作時に差し替え</span></div><h3>洗面台の交換と床の張り替え</h3><div class="meta"><span>川口市</span><span>築22年</span><span>工期 2日</span></div></article>
+    <article class="work" data-c="kitchen"><div class="img k6"><span>PHOTO 制作時に差し替え</span></div><h3>パントリーの新設</h3><div class="meta"><span>川口市</span><span>築15年</span><span>工期 4日</span></div></article>
+  </div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <div class="head"><h2>選ばれる理由（掲載例）</h2></div>
+  <div class="why">
+    <div><b>現地で測ってから設計</b><p>図面だけで判断せず、床の傾きや壁の下地まで確認してからプランを作ります。</p></div>
+    <div><b>見積りは部位ごとに</b><p>「一式」でまとめず、材料と工事を分けて記載します。比較検討しやすくなります。</p></div>
+    <div><b>完成後の点検</b><p>引き渡し後も定期的にお伺いし、不具合がないか確認します（頻度は表示例）。</p></div>
+  </div>
+</div></section>
+
+<div class="band"><div class="wrap">
+  <div><h2>まずは現地調査から</h2><p>ご自宅を拝見し、ご希望をお聞きしたうえでプランとお見積りを作ります。</p></div>
+  <a class="btn" href="#company">相談の申し込み</a>
+</div></div>
+
+<section id="company" class="co"><div class="wrap">
+  <div class="head"><h2>会社概要</h2></div>
+  <dl>
+    <dt>会社名</dt><dd>木と灰リフォーム（架空）</dd>
+    <dt>所在地</dt><dd>埼玉県川口市○○（表示例）</dd>
+    <dt>建設業許可</dt><dd>埼玉県知事許可（般-○）第○○○○○号（表示例）</dd>
+    <dt>電話</dt><dd>048-000-0000（デモ番号）</dd>
+  </dl>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>© 木と灰リフォーム（架空のデモ企業）</span><span>Website demo by generalstoreall</span></div></footer>
+
+<script>
+(function(){
+  const bs=[...document.querySelectorAll('#filter button')],ws=[...document.querySelectorAll('#gallery .work')];
+  bs.forEach(b=>b.addEventListener('click',()=>{
+    bs.forEach(x=>x.setAttribute('aria-pressed',x===b));
+    ws.forEach(w=>{w.hidden=!(b.dataset.c==='all'||w.dataset.c===b.dataset.c)});
+  }));
+  const c=document.getElementById('plan'),ctx=c.getContext('2d');
+  function draw(){
+    const r=c.getBoundingClientRect(),d=window.devicePixelRatio||1;
+    c.width=r.width*d;c.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);
+    const W=r.width,H=r.height,p=W*.1;
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='#22262a';ctx.lineWidth=3;
+    ctx.strokeRect(p,p,W-2*p,H-2*p);
+    ctx.lineWidth=1.5;
+    const x1=p+(W-2*p)*.62,y1=p+(H-2*p)*.55;
+    ctx.beginPath();ctx.moveTo(x1,p);ctx.lineTo(x1,H-p);ctx.moveTo(x1,y1);ctx.lineTo(W-p,y1);ctx.stroke();
+    ctx.fillStyle='#e1eeee';ctx.fillRect(p+8,H-p-(H-2*p)*.18,(W-2*p)*.35,(H-2*p)*.12);
+    ctx.fillStyle='#22262a';ctx.font='600 '+Math.max(12,W*.035)+'px "Zen Old Mincho",serif';
+    ctx.fillText('LDK',p+(W-2*p)*.25,p+(H-2*p)*.4);
+    ctx.fillText('浴室',x1+(W-p-x1)*.3,p+(y1-p)*.55);
+    ctx.fillText('洗面',x1+(W-p-x1)*.3,y1+(H-p-y1)*.55);
+    ctx.strokeStyle='#2f6f73';ctx.fillStyle='#2f6f73';ctx.lineWidth=1;
+    ctx.font='500 '+Math.max(10,W*.026)+'px "IBM Plex Mono",monospace';
+    const yd=p*.5;
+    ctx.beginPath();ctx.moveTo(p,yd);ctx.lineTo(x1,yd);ctx.moveTo(p,yd-5);ctx.lineTo(p,yd+5);ctx.moveTo(x1,yd-5);ctx.lineTo(x1,yd+5);ctx.stroke();
+    ctx.textAlign='center';ctx.fillText('5,460',(p+x1)/2,yd-6);
+    const xd=W-p*.5;
+    ctx.beginPath();ctx.moveTo(xd,p);ctx.lineTo(xd,y1);ctx.moveTo(xd-5,p);ctx.lineTo(xd+5,p);ctx.moveTo(xd-5,y1);ctx.lineTo(xd+5,y1);ctx.stroke();
+    ctx.save();ctx.translate(xd+12,(p+y1)/2);ctx.rotate(Math.PI/2);ctx.fillText('1,820',0,0);ctx.restore();
+    ctx.textAlign='left';ctx.fillText('KITCHEN H=850',p+12,H-p-(H-2*p)*.2);
+  }
+  draw();addEventListener('resize',draw);
+  if(document.fonts)document.fonts.ready.then(draw);
+})();
+</script>
+</body>
+</html>

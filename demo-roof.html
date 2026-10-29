@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>スレートライン屋根工業</title>
+<meta name="description" content="屋根修理業者向けデモサイト（架空企業）。制作：generalstoreall">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Barlow+Condensed:wght@500;700&display=swap">
+<style>
+/* Layout: 屋根の勾配線を全体のモチーフに。斜めの帯でセクションを区切る1カラム＋情報グリッド */
+:root{
+  --bg:#f3f5f7; --surface:#ffffff; --ink:#18222e; --muted:#5b6876;
+  --steel:#2c3e52; --galva:#c9d2db; --line:#dde3e9;
+  --accent:#e8a317; --accent-ink:#1a1405; --ok:#2f7d4f; --warn:#b5491f;
+  --f-display:"Dela Gothic One","Hiragino Kaku Gothic StdN","Yu Gothic",sans-serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-num:"Barlow Condensed","Arial Narrow",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10161d; --surface:#18212b; --ink:#e7ecf1; --muted:#9aa7b4;
+  --steel:#0b1118; --galva:#34414f; --line:#2a3542;
+  --accent:#f0b43a; --accent-ink:#1a1405; --ok:#5cbf85; --warn:#ef8a5e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10161d; --surface:#18212b; --ink:#e7ecf1; --muted:#9aa7b4;
+  --steel:#0b1118; --galva:#34414f; --line:#2a3542;
+  --accent:#f0b43a; --accent-ink:#1a1405; --ok:#5cbf85; --warn:#ef8a5e; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.8;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;margin:0}
+h2{font-family:var(--f-display);font-weight:400;font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.35}
+.eyebrow{font-family:var(--f-num);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-size:.85rem}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.demo{background:var(--accent);color:var(--accent-ink);font-size:.82rem;font-weight:700;text-align:center}
+.demo .wrap{padding-block:6px}
+
+header{background:var(--steel);color:#fff;position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--steel)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-size:1.05rem;letter-spacing:.02em}
+.logo svg{flex:none}
+.tel{display:flex;flex-direction:column;align-items:flex-end;line-height:1.2}
+.tel b{font-family:var(--f-num);font-size:1.6rem;letter-spacing:.03em;color:var(--accent)}
+.tel small{font-size:.72rem;opacity:.8}
+
+.hero{background:var(--steel);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;padding-block:48px 88px}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(2rem,5.4vw,3.4rem);line-height:1.3}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:#cfd8e1;max-width:34em}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:60px;background:var(--bg);clip-path:polygon(0 100%,50% 0,100% 100%)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.btn{display:inline-block;padding:12px 22px;border-radius:4px;font-weight:700;text-decoration:none;border:2px solid var(--accent);cursor:pointer;font-family:var(--f-body);font-size:1rem}
+.btn-main{background:var(--accent);color:var(--accent-ink)}
+.btn-sub{background:transparent;color:#fff}
+.pitch{min-width:0}
+.pitch svg{width:100%;height:auto;max-width:440px;display:block;margin-left:auto}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.badges span{font-size:.78rem;border:1px solid rgba(255,255,255,.35);padding:3px 10px;border-radius:2px}
+
+section{padding-block:64px}
+.head{display:grid;gap:6px;margin-bottom:28px}
+.lead{color:var(--muted);max-width:40em;margin:0}
+
+/* 症状チェック */
+.check{display:grid;grid-template-columns:1.3fr 1fr;gap:24px}
+.check ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.check label{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);padding:12px 14px;border-radius:4px;cursor:pointer}
+.check input{width:20px;height:20px;margin-top:4px;accent-color:var(--accent);flex:none}
+.result{background:var(--surface);border:2px solid var(--line);border-radius:6px;padding:22px;align-self:start;position:sticky;top:96px}
+.result .level{font-family:var(--f-display);font-size:1.4rem}
+.meter{height:10px;background:var(--galva);border-radius:5px;overflow:hidden;margin:12px 0}
+.meter i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s,background .3s}
+.result p{margin:0;color:var(--muted);font-size:.92rem}
+
+/* サービス */
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.svc article{background:var(--surface);border-top:4px solid var(--steel);padding:22px;display:grid;gap:8px;align-content:start}
+:root[data-theme="dark"] .svc article{border-top-color:var(--accent)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .svc article{border-top-color:var(--accent)}}
+.svc h3{font-size:1.15rem}
+.svc p{margin:0;color:var(--muted);font-size:.93rem}
+.svc .mat{font-family:var(--f-num);font-size:.85rem;letter-spacing:.06em;color:var(--muted)}
+
+/* 流れ */
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:s}
+.flow li{position:relative;padding:18px 14px 18px 0;border-top:2px solid var(--line)}
+.flow li::before{counter-increment:s;content:"STEP " counter(s);display:block;font-family:var(--f-num);font-weight:700;color:var(--accent);letter-spacing:.1em;font-size:.85rem}
+.flow b{display:block;margin:4px 0}
+.flow span{color:var(--muted);font-size:.88rem;display:block}
+
+/* 料金 */
+.price{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:4px}
+table{width:100%;border-collapse:collapse;min-width:560px}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.8rem;color:var(--muted);font-weight:500;letter-spacing:.06em}
+td.num{font-family:var(--f-num);font-size:1.25rem;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
+.note{font-size:.82rem;color:var(--muted);margin-top:10px}
+
+/* 事例 */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.case{background:var(--surface);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.ph{display:grid;grid-template-columns:1fr 1fr;aspect-ratio:16/8;max-width:100%}
+.ph div{display:flex;align-items:flex-end;padding:8px;font-size:.72rem;font-weight:700;color:#fff;letter-spacing:.08em}
+.ph .b{background:repeating-linear-gradient(135deg,#6d5b4a 0 10px,#7d6a57 10px 20px)}
+.ph .a{background:repeating-linear-gradient(90deg,#3e5468 0 14px,#4a6278 14px 16px)}
+.case .body{padding:16px;display:grid;gap:4px}
+.case dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:6px 0 0;font-size:.85rem}
+.case dt{color:var(--muted)}
+.case dd{margin:0}
+
+/* 声 */
+.voices{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.voices blockquote{margin:0;background:var(--surface);padding:20px;border-left:3px solid var(--galva)}
+.voices cite{display:block;font-style:normal;color:var(--muted);font-size:.85rem;margin-top:8px}
+
+/* FAQ */
+details{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px 18px}
+details+details{margin-top:8px}
+summary{cursor:pointer;font-weight:700}
+details p{margin:8px 0 0;color:var(--muted)}
+
+/* 会社・問い合わせ */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.co dl{display:grid;grid-template-columns:7em 1fr;gap:10px 16px;margin:0}
+.co dt{color:var(--muted);font-size:.88rem}
+.co dd{margin:0}
+form{display:grid;gap:14px;background:var(--surface);padding:24px;border-radius:6px;border:1px solid var(--line)}
+form label{display:grid;gap:4px;font-size:.9rem;font-weight:500}
+input[type=text],input[type=tel],select,textarea{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);width:100%}
+.sent{color:var(--ok);font-weight:700;margin:0}
+
+footer{background:var(--steel);color:#cfd8e1;font-size:.82rem}
+footer .wrap{padding-block:28px;display:grid;gap:6px}
+
+@media (max-width:820px){
+  .hero .wrap,.check,.two{grid-template-columns:1fr}
+  .pitch svg{margin:0 auto;max-width:320px}
+  .svc,.cases{grid-template-columns:1fr}
+  .voices{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .flow li{padding:14px 0}
+  .result{position:static}
+  .tel b{font-size:1.3rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="demo"><div class="wrap">これは generalstoreall が制作したデモサイトです。会社名・電話番号・実績・料金はすべて架空の表示例です。 <a href="demos-index.html">← デモ一覧へ</a></div></div>
+
+<header>
+  <div class="wrap">
+    <div class="logo">
+      <svg width="34" height="24" viewBox="0 0 34 24" aria-hidden="true"><path d="M2 20 L17 4 L32 20" fill="none" stroke="#e8a317" stroke-width="3.5" stroke-linejoin="miter"/><path d="M8 20 L17 10.5 L26 20" fill="none" stroke="#c9d2db" stroke-width="2.5"/></svg>
+      スレートライン屋根工業
+    </div>
+    <div class="tel"><b>0120-000-000</b><small>受付 8:00〜19:00／日曜定休（デモ番号）</small></div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Roof repair · Kawaguchi / Saitama</p>
+      <h1>雨漏り・屋根の傷み、<br><em>写真で見せて</em>から直します。</h1>
+      <p>川口市・さいたま市・戸田市の屋根修理。点検ではドローンと屋根上の撮影を行い、劣化箇所を写真付きの報告書でお渡しします。見えない屋根の上だからこそ、判断材料をすべてお見せします。</p>
+      <div class="cta">
+        <a class="btn btn-main" href="#contact">無料点検を申し込む</a>
+        <a class="btn btn-sub" href="#check">症状をセルフチェック</a>
+      </div>
+      <div class="badges"><span>建設業許可（表示例）</span><span>写真付き報告書</span><span>見積後の追加請求なし</span></div>
+    </div>
+    <div class="pitch">
+      <svg viewBox="0 0 440 280" role="img" aria-label="屋根勾配の図。4寸勾配は水平10に対して高さ4">
+        <path d="M30 230 L220 70 L410 230" fill="none" stroke="#c9d2db" stroke-width="6"/>
+        <path d="M60 230 L220 95 L380 230" fill="none" stroke="#4a6278" stroke-width="2" stroke-dasharray="6 6"/>
+        <line x1="220" y1="70" x2="220" y2="230" stroke="#e8a317" stroke-width="2"/>
+        <line x1="30" y1="230" x2="220" y2="230" stroke="#e8a317" stroke-width="2"/>
+        <text x="120" y="254" fill="#e8a317" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="18" text-anchor="middle">水平 10</text>
+        <text x="232" y="160" fill="#e8a317" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="18">高さ 4</text>
+        <text x="300" y="56" fill="#ffffff" font-family="Dela Gothic One, sans-serif" font-size="30">4寸勾配</text>
+        <text x="300" y="80" fill="#cfd8e1" font-family="Zen Kaku Gothic New, sans-serif" font-size="13">住宅で多い標準的な勾配</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<main>
+<section id="check">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Self check</p>
+      <h2>屋根の症状セルフチェック</h2>
+      <p class="lead">地上やベランダから見える範囲で当てはまるものを選んでください。屋根には登らないでください。</p>
+    </div>
+    <div class="check">
+      <ul id="symptoms">
+        <li><label><input type="checkbox" id="s1" data-w="3">天井や壁に雨じみがある</label></li>
+        <li><label><input type="checkbox" id="s2" data-w="2">台風や強風のあと、棟板金（屋根のてっぺんの金属）が浮いて見える</label></li>
+        <li><label><input type="checkbox" id="s3" data-w="2">瓦のずれ・割れが見える</label></li>
+        <li><label><input type="checkbox" id="s4" data-w="1">スレート屋根の色あせ、コケ・カビが目立つ</label></li>
+        <li><label><input type="checkbox" id="s5" data-w="1">雨樋から水があふれる、たわんでいる</label></li>
+        <li><label><input type="checkbox" id="s6" data-w="1">築15年以上、屋根の点検をしたことがない</label></li>
+      </ul>
+      <div class="result" aria-live="polite">
+        <div class="level" id="lv">選択してください</div>
+        <div class="meter"><i id="bar"></i></div>
+        <p id="msg">当てはまる症状にチェックを入れると、目安が表示されます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Services</p>
+      <h2>対応している工事</h2>
+    </div>
+    <div class="svc">
+      <article><span class="mat">ALL ROOF TYPES</span><h3>雨漏り修理</h3><p>散水調査などで浸入経路を特定してから補修します。原因が分からないまま塞ぐ工事はしません。</p></article>
+      <article><span class="mat">SLATE / METAL</span><h3>棟板金の交換</h3><p>釘の浮きや下地の貫板の腐食は強風で飛散する原因になります。貫板ごと交換します。</p></article>
+      <article><span class="mat">SLATE → GALVALUME</span><h3>カバー工法</h3><p>既存のスレートの上にガルバリウム鋼板を重ねます。撤去費と廃材を抑えられる工法です。</p></article>
+      <article><span class="mat">TILE / SLATE</span><h3>葺き替え</h3><p>下地の野地板・防水シートから新しくします。築年数が長く下地まで傷んでいる場合の選択肢です。</p></article>
+      <article><span class="mat">TILE</span><h3>瓦の差し替え・漆喰補修</h3><p>割れた瓦の部分交換と、棟の漆喰の詰め直しに対応します。</p></article>
+      <article><span class="mat">GUTTER</span><h3>雨樋の交換・清掃</h3><p>詰まり除去から金具の交換、全体の掛け替えまで対応します。</p></article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Flow</p>
+      <h2>ご依頼から完了まで</h2>
+    </div>
+    <ol class="flow">
+      <li><b>お問い合わせ</b><span>電話またはフォームから。症状と住所を伺います。</span></li>
+      <li><b>無料点検</b><span>ドローンと屋根上で撮影。所要時間は約1時間です。</span></li>
+      <li><b>報告とお見積り</b><span>写真付き報告書と、工事内容別の見積書をお渡しします。</span></li>
+      <li><b>施工</b><span>工事中も毎日の作業写真をお送りします。</span></li>
+      <li><b>完了確認</b><span>完了写真でご確認いただき、お引き渡しします。</span></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Price</p>
+      <h2>料金の目安</h2>
+      <p class="lead">以下はデモ用の表示例です。実際の料金は屋根の面積・勾配・足場の要否で変わります。</p>
+    </div>
+    <div class="price">
+      <table>
+        <thead><tr><th>工事内容</th><th>目安（表示例）</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>屋根点検・報告書作成</td><td class="num">0円</td><td>川口市・さいたま市・戸田市</td></tr>
+          <tr><td>瓦の差し替え（数枚）</td><td class="num">○万円〜</td><td>足場なしで作業できる場合</td></tr>
+          <tr><td>棟板金の交換</td><td class="num">○万円〜</td><td>貫板の交換を含む</td></tr>
+          <tr><td>カバー工法</td><td class="num">○○万円〜</td><td>足場代は別途</td></tr>
+          <tr><td>葺き替え</td><td class="num">○○万円〜</td><td>既存屋根の撤去・処分費を含む</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">※ 制作時は、お客様の実際の料金表に差し替えます。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Works</p>
+      <h2>施工事例</h2>
+      <p class="lead">実際のサイトでは、ここに施工前・施工後の写真が入ります。</p>
+    </div>
+    <div class="cases">
+      <div class="case"><div class="ph"><div class="b">BEFORE</div><div class="a">AFTER</div></div><div class="body"><b>スレート屋根のカバー工法</b><dl><dt>地域</dt><dd>川口市（表示例）</dd><dt>築年数</dt><dd>築24年</dd><dt>工期</dt><dd>6日</dd></dl></div></div>
+      <div class="case"><div class="ph"><div class="b">BEFORE</div><div class="a">AFTER</div></div><div class="body"><b>台風後の棟板金交換</b><dl><dt>地域</dt><dd>さいたま市（表示例）</dd><dt>築年数</dt><dd>築17年</dd><dt>工期</dt><dd>1日</dd></dl></div></div>
+      <div class="case"><div class="ph"><div class="b">BEFORE</div><div class="a">AFTER</div></div><div class="body"><b>和室天井の雨漏り修理</b><dl><dt>地域</dt><dd>戸田市（表示例）</dd><dt>築年数</dt><dd>築31年</dd><dt>工期</dt><dd>2日</dd></dl></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Voices</p>
+      <h2>お客様の声（掲載例）</h2>
+      <p class="lead">実際のサイトでは、掲載の許可をいただいたお客様の声に差し替えます。</p>
+    </div>
+    <div class="voices">
+      <blockquote>屋根の上の写真を見せてもらえたので、工事が本当に必要か自分で判断できました。<cite>— 掲載例の文章です</cite></blockquote>
+      <blockquote>見積りが工事ごとに分かれていて、どこにいくらかかるのか分かりやすかったです。<cite>— 掲載例の文章です</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">FAQ</p>
+      <h2>よくあるご質問</h2>
+    </div>
+    <details><summary>点検だけでも依頼できますか？</summary><p>はい。点検後に工事をお断りいただいても費用はかかりません。</p></details>
+    <details><summary>突然訪問してきた業者に「屋根が壊れている」と言われました。</summary><p>その場で契約せず、別の業者にも点検を依頼して比較することをおすすめします。訪問販売で結んだ契約は、条件を満たせばクーリング・オフの対象になります。</p></details>
+    <details><summary>工事中、家にいる必要はありますか？</summary><p>着工日と完了確認の日以外は、ご在宅でなくても作業できます。</p></details>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap two">
+    <div class="co">
+      <div class="head">
+        <p class="eyebrow">Company</p>
+        <h2>会社概要</h2>
+      </div>
+      <dl>
+        <dt>会社名</dt><dd>スレートライン屋根工業（架空）</dd>
+        <dt>所在地</dt><dd>埼玉県川口市○○町（表示例）</dd>
+        <dt>建設業許可</dt><dd>埼玉県知事許可（般-○）第○○○○○号（表示例）</dd>
+        <dt>対応エリア</dt><dd>川口市・さいたま市・戸田市・蕨市</dd>
+        <dt>電話</dt><dd>0120-000-000（デモ番号）</dd>
+      </dl>
+    </div>
+    <form id="f" novalidate>
+      <h2 style="font-size:1.3rem">無料点検のお申し込み</h2>
+      <label for="nm">お名前<input type="text" id="nm" autocomplete="off" placeholder="例）川口 太郎"></label>
+      <label for="tl">電話番号<input type="tel" id="tl" autocomplete="off" placeholder="例）090-0000-0000"></label>
+      <label for="ty">ご相談内容
+        <select id="ty"><option>雨漏り</option><option>棟板金の浮き</option><option>瓦のずれ・割れ</option><option>屋根全体の点検</option><option>その他</option></select>
+      </label>
+      <label for="ms">症状など<textarea id="ms" rows="3" placeholder="例）台風のあと2階の天井にしみが出た"></textarea></label>
+      <button class="btn btn-main" type="submit">申し込む</button>
+      <p class="sent" id="sent" hidden>デモのため送信はされません。実際のサイトでは、ここからメールで受け付けます。</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© スレートライン屋根工業（架空のデモ企業）</span><span>Website demo by generalstoreall</span></div></footer>
+
+<script>
+(function(){
+  const boxes=[...document.querySelectorAll('#symptoms input')];
+  const lv=document.getElementById('lv'),bar=document.getElementById('bar'),msg=document.getElementById('msg');
+  const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  function update(){
+    const s=boxes.reduce((a,b)=>a+(b.checked?+b.dataset.w:0),0);
+    const urgent=document.getElementById('s1').checked;
+    let t,m,c,w;
+    if(s===0){t='選択してください';m='当てはまる症状にチェックを入れると、目安が表示されます。';c=css('--ok');w=0}
+    else if(urgent||s>=4){t='早めの点検をおすすめします';m='雨水が建物内に入っている可能性があります。放置すると下地の腐食が進むため、早めにご相談ください。';c=css('--warn');w=100}
+    else if(s>=2){t='点検をおすすめします';m='次の台風や大雨の前に、一度状態を確認しておくと安心です。';c=css('--accent');w=60}
+    else{t='経過観察でも大丈夫そうです';m='すぐに工事が必要な症状ではありません。気になる場合は点検だけでもお受けします。';c=css('--ok');w=25}
+    lv.textContent=t;msg.textContent=m;bar.style.width=w+'%';bar.style.background=c;
+  }
+  boxes.forEach(b=>b.addEventListener('change',update));
+  document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();document.getElementById('sent').hidden=false});
+})();
+</script>
+
+</body>
+</html>

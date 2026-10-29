@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>アクアレスキュー川口</title>
+<meta name="description" content="水道修理業者向けデモサイト（架空企業）。制作：generalstoreall">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Murecho:wght@500;800;900&family=Noto+Sans+JP:wght@400;500;700&family=Oswald:wght@500;700&display=swap">
+<style>
+/* Layout: 緊急対応型。電話番号を常に画面内に置き、症状→料金→電話の最短導線 */
+:root{
+  --bg:#f4f8fb; --surface:#ffffff; --ink:#0f1f33; --muted:#526478; --line:#dbe5ee;
+  --blue:#0b4f9c; --deep:#082f5e; --cyan:#19b3e6; --red:#d6332b; --yellow:#ffd23f;
+  --f-display:"Murecho","Hiragino Kaku Gothic StdN","Yu Gothic",sans-serif;
+  --f-body:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-num:"Oswald","Arial Narrow",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.75;font-size:16px;padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;margin:0}
+h2{font-family:var(--f-display);font-weight:900;font-size:clamp(1.5rem,3.6vw,2.1rem);line-height:1.35}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.demo{background:var(--yellow);color:#2a2100;font-size:.8rem;font-weight:700;text-align:center}
+.demo .wrap{padding-block:6px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.demo a{color:inherit}
+header{background:var(--surface);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:10px;flex-wrap:wrap}
+.logo{font-family:var(--f-display);font-weight:900;font-size:1.2rem;color:var(--blue);display:flex;align-items:center;gap:8px}
+.logo svg{flex:none}
+.open{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700}
+.dot{width:10px;height:10px;border-radius:50%;background:#2fb46b;box-shadow:0 0 0 4px rgba(47,180,107,.2)}
+.hero{background:linear-gradient(160deg,var(--blue),var(--deep));color:#fff}
+.hero .wrap{padding-block:40px 48px;display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:center}
+.hero h1{font-family:var(--f-display);font-weight:900;font-size:clamp(2rem,6vw,3.5rem);line-height:1.25}
+.hero h1 span{color:var(--yellow)}
+.hero p{color:#d5e5f5;margin:14px 0 0}
+.callbox{background:var(--surface);color:var(--ink);border-radius:10px;padding:22px;display:grid;gap:8px;text-align:center}
+.callbox small{color:var(--muted);font-weight:700}
+.callbox .num{font-family:var(--f-num);font-weight:700;font-size:clamp(2rem,6vw,2.6rem);color:var(--red);letter-spacing:.02em;line-height:1.1}
+.callbox .sub{font-size:.82rem;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.25);margin-top:22px;border-radius:6px;overflow:hidden}
+.facts div{background:rgba(8,47,94,.55);padding:12px;text-align:center}
+.facts b{display:block;font-family:var(--f-num);font-size:1.6rem;color:var(--yellow);line-height:1.1}
+.facts span{font-size:.75rem;color:#d5e5f5}
+section{padding-block:56px}
+.head{display:grid;gap:6px;margin-bottom:24px}
+.eyebrow{font-family:var(--f-num);letter-spacing:.16em;color:var(--cyan);font-weight:700;font-size:.85rem}
+.lead{color:var(--muted);margin:0;max-width:40em}
+.picker{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.picker button{font:inherit;font-weight:700;background:var(--surface);border:2px solid var(--line);border-radius:8px;padding:16px 8px;cursor:pointer;display:grid;gap:6px;justify-items:center;color:var(--ink)}
+.picker button svg{width:36px;height:36px}
+.picker button[aria-pressed="true"]{border-color:var(--blue);background:#e8f1fb}
+.answer{margin-top:16px;background:var(--surface);border-left:6px solid var(--blue);border-radius:6px;padding:20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.answer h3{font-size:1.2rem}
+.answer p{margin:6px 0 0;color:var(--muted);font-size:.92rem}
+.answer .price{font-family:var(--f-num);font-weight:700;font-size:1.8rem;color:var(--blue);white-space:nowrap}
+.answer .price small{font-family:var(--f-body);font-size:.75rem;color:var(--muted);display:block;text-align:right}
+.promise{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.promise div{background:var(--surface);padding:22px;border-radius:8px;border:1px solid var(--line)}
+.promise b{display:block;font-size:1.08rem;margin-bottom:6px}
+.promise p{margin:0;color:var(--muted);font-size:.92rem}
+.area{display:flex;flex-wrap:wrap;gap:8px}
+.area span{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:4px 14px;font-size:.9rem}
+.cmp{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:22px}
+.cmp ul{margin:0;padding-left:1.2em;color:var(--muted)}
+.cmp li+li{margin-top:6px}
+.co dl{display:grid;grid-template-columns:9em 1fr;gap:8px 16px;margin:0;background:var(--surface);padding:22px;border-radius:8px;border:1px solid var(--line)}
+.co dt{color:var(--muted);font-size:.88rem}
+.co dd{margin:0}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--red);color:#fff;z-index:30;padding-bottom:env(safe-area-inset-bottom,0px)}
+.bar .wrap{display:flex;align-items:center;justify-content:center;gap:14px;padding-block:10px;flex-wrap:wrap}
+.bar b{font-family:var(--f-num);font-size:1.7rem;letter-spacing:.03em}
+.bar span{font-size:.8rem;font-weight:700}
+footer{background:var(--deep);color:#b9cbe0;font-size:.82rem}
+footer .wrap{padding-block:24px;display:grid;gap:4px}
+@media (max-width:800px){
+  .hero .wrap,.promise{grid-template-columns:1fr}
+  .picker{grid-template-columns:repeat(2,1fr)}
+  .answer{grid-template-columns:1fr}
+  .answer .price small{text-align:left}
+  .co dl{grid-template-columns:1fr}
+  .co dt{margin-top:6px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="demo"><div class="wrap"><span>generalstoreall 制作のデモサイトです。会社名・電話番号・料金はすべて架空の表示例です。</span><a href="demos-index.html">← デモ一覧へ</a></div></div>
+
+<header><div class="wrap">
+  <div class="logo"><svg width="22" height="28" viewBox="0 0 22 28" aria-hidden="true"><path d="M11 1 C11 1 1 13 1 18.5 A10 10 0 0 0 21 18.5 C21 13 11 1 11 1Z" fill="#19b3e6"/></svg>アクアレスキュー川口</div>
+  <div class="open"><span class="dot"></span>本日受付中・年中無休 8:00〜22:00</div>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div>
+    <h1>水のトラブル、<br><span>最短30分</span>で駆けつけます。</h1>
+    <p>トイレのつまり・水漏れ・蛇口の故障。川口市内なら、お電話から到着までの目安は30分〜1時間です。作業前に必ず料金をお伝えし、ご了承いただいてから作業します。</p>
+    <div class="facts">
+      <div><b>30分</b><span>到着目安（表示例）</span></div>
+      <div><b>0円</b><span>見積り・出張費（表示例）</span></div>
+      <div><b>365日</b><span>受付</span></div>
+    </div>
+  </div>
+  <div class="callbox">
+    <small>お電話一本で手配します</small>
+    <div class="num">0120-000-000</div>
+    <div class="sub">デモ用の番号です。実際にはつながりません。</div>
+  </div>
+</div></div>
+
+<main>
+<section><div class="wrap">
+  <div class="head"><p class="eyebrow">TROUBLE</p><h2>どんな症状ですか？</h2><p class="lead">症状を選ぶと、作業内容と料金の目安を表示します。</p></div>
+  <div class="picker" id="picker">
+    <button type="button" data-k="toilet" aria-pressed="true"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="8" y="4" width="20" height="10" rx="2" fill="#0b4f9c"/><path d="M6 16h24c0 8-5 12-12 12S6 24 6 16Z" fill="#19b3e6"/><rect x="13" y="28" width="10" height="5" fill="#0b4f9c"/></svg>トイレのつまり</button>
+    <button type="button" data-k="leak" aria-pressed="false"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="2" y="8" width="32" height="7" rx="2" fill="#0b4f9c"/><path d="M18 18c0 0-5 6-5 9a5 5 0 0 0 10 0c0-3-5-9-5-9Z" fill="#19b3e6"/></svg>水漏れ</button>
+    <button type="button" data-k="tap" aria-pressed="false"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="4" y="8" width="22" height="7" rx="2" fill="#0b4f9c"/><rect x="20" y="15" width="6" height="8" fill="#0b4f9c"/><rect x="12" y="3" width="6" height="5" fill="#0b4f9c"/><circle cx="23" cy="29" r="3" fill="#19b3e6"/></svg>蛇口の故障</button>
+    <button type="button" data-k="drain" aria-pressed="false"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="#0b4f9c"/><circle cx="18" cy="18" r="9" fill="none" stroke="#19b3e6" stroke-width="2.5"/><path d="M18 9v18M9 18h18" stroke="#19b3e6" stroke-width="2.5"/></svg>排水口のつまり</button>
+  </div>
+  <div class="answer" aria-live="polite">
+    <div><h3 id="aT"></h3><p id="aD"></p></div>
+    <div class="price" id="aP"></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><p class="eyebrow">PROMISE</p><h2>3つのお約束</h2></div>
+  <div class="promise">
+    <div><b>作業前に金額を確定</b><p>見積書に書いた金額以外はいただきません。ご納得いただけない場合はお断りいただけます。</p></div>
+    <div><b>交換部品をお見せします</b><p>交換が必要な理由を、取り外した部品を見せながら説明します。</p></div>
+    <div><b>作業後の保証</b><p>同じ箇所の不具合は、一定期間無料で再対応します（期間は表示例）。</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><p class="eyebrow">CAUTION</p><h2>業者選びで気をつけたいこと</h2></div>
+  <div class="cmp"><ul>
+    <li>広告の「○○円〜」は基本料金だけのことがあります。作業前に総額を確認してください。</li>
+    <li>その場で高額な交換工事を急かされたら、即決せず他社にも見積りを依頼してください。</li>
+    <li>自治体の「指定給水装置工事事業者」かどうかは、市区町村のホームページで確認できます。</li>
+  </ul></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><p class="eyebrow">AREA</p><h2>対応エリア</h2></div>
+  <div class="area"><span>川口市</span><span>蕨市</span><span>戸田市</span><span>さいたま市南区</span><span>さいたま市緑区</span><span>草加市</span><span>東京都北区</span><span>東京都足立区</span></div>
+</div></section>
+
+<section class="co"><div class="wrap">
+  <div class="head"><p class="eyebrow">COMPANY</p><h2>会社概要</h2></div>
+  <dl>
+    <dt>屋号</dt><dd>アクアレスキュー川口（架空）</dd>
+    <dt>所在地</dt><dd>埼玉県川口市○○（表示例）</dd>
+    <dt>指定工事事業者</dt><dd>川口市指定給水装置工事事業者 第○○○号（表示例）</dd>
+    <dt>電話</dt><dd>0120-000-000（デモ番号）</dd>
+  </dl>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>© アクアレスキュー川口（架空のデモ企業）</span><span>Website demo by generalstoreall</span></div></footer>
+
+<div class="bar"><div class="wrap"><span>水のトラブル 24時間受付（表示例）</span><b>0120-000-000</b></div></div>
+
+<script>
+(function(){
+  const data={
+    toilet:["トイレのつまり","ラバーカップや専用器具で解消します。異物が原因の場合は便器を外して取り出します。","○,○○○円〜"],
+    leak:["水漏れ","給水管・パッキン・接続部のどこから漏れているかを特定してから修理します。","○,○○○円〜"],
+    tap:["蛇口の故障","パッキンやカートリッジの交換で直るか確認し、直らない場合のみ本体交換をご提案します。","○,○○○円〜"],
+    drain:["排水口のつまり","キッチン・浴室・洗面所の排水管を高圧洗浄や専用ワイヤーで清掃します。","○,○○○円〜"]
+  };
+  const btns=[...document.querySelectorAll('#picker button')];
+  function show(k){
+    btns.forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
+    const d=data[k];
+    document.getElementById('aT').textContent=d[0];
+    document.getElementById('aD').textContent=d[1];
+    document.getElementById('aP').innerHTML=d[2]+'<small>料金は表示例です</small>';
+  }
+  btns.forEach(b=>b.addEventListener('click',()=>show(b.dataset.k)));
+  show('toilet');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>てつだい堂</title>
+<meta name="description" content="便利屋向けデモサイト（架空企業）。制作：generalstoreall">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=M+PLUS+2:wght@400;500;700&display=swap">
+<style>
+/* Layout: メニュー表型。「何を頼めるか」を値札つきのメニューで一覧し、組み合わせ見積りで背中を押す */
+:root{
+  --bg:#eef4f1; --surface:#ffffff; --ink:#1d2b26; --muted:#5a6c65; --line:#d3e1da;
+  --green:#2e7d5b; --green-d:#1f5a41; --mustard:#e2b13c; --tag:#fff3d4;
+  --f-display:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;
+  --f-body:"M PLUS 2","Hiragino Sans","Yu Gothic",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.8;font-size:16px}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;margin:0;font-family:var(--f-display)}
+h2{font-weight:900;font-size:clamp(1.5rem,3.6vw,2rem)}
+:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+.demo{background:var(--green-d);color:#fff;font-size:.8rem;font-weight:700;text-align:center}
+.demo .wrap{padding-block:6px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.demo a{color:#ffe08a}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:14px;flex-wrap:wrap}
+.logo{font-family:var(--f-display);font-weight:900;font-size:1.4rem;color:var(--green);display:flex;gap:8px;align-items:center}
+.logo i{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--mustard);color:var(--green-d);font-style:normal;font-size:1.1rem}
+.tel{font-weight:700;color:var(--green-d)}
+.tel b{font-size:1.3rem;letter-spacing:.03em}
+.hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:center;padding-block:24px 48px}
+.hero h1{font-weight:900;font-size:clamp(2rem,5.5vw,3.2rem);line-height:1.3}
+.hero h1 mark{background:linear-gradient(transparent 60%,var(--mustard) 60%);color:inherit}
+.hero p{color:var(--muted);margin:14px 0 0}
+.bubbles{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.bubbles span{background:var(--surface);border:2px solid var(--line);border-radius:999px;padding:8px 16px;font-weight:700;font-size:.95rem}
+.bubbles span:nth-child(3n){border-color:var(--mustard)}
+.bubbles span:nth-child(4n){border-color:var(--green);color:var(--green)}
+section{padding-block:52px}
+.head{display:grid;gap:6px;margin-bottom:22px}
+.lead{color:var(--muted);margin:0;max-width:40em}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tabs button{font:inherit;font-weight:700;border:2px solid var(--green);background:transparent;color:var(--green);border-radius:999px;padding:6px 16px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--green);color:#fff}
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.item{background:var(--surface);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;border:1px solid var(--line)}
+.item input{width:22px;height:22px;accent-color:var(--green)}
+.item b{display:block}
+.item small{color:var(--muted);font-size:.85rem;display:block;line-height:1.5}
+.item .yen{font-weight:700;white-space:nowrap;background:var(--tag);padding:2px 10px;border-radius:6px;font-size:.92rem}
+.total{margin-top:16px;background:var(--green);color:#fff;border-radius:14px;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.total b{font-family:var(--f-display);font-size:1.4rem}
+.total small{display:block;opacity:.85;font-size:.82rem}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:n}
+.steps li{background:var(--surface);border-radius:12px;padding:18px;border:1px solid var(--line)}
+.steps li::before{counter-increment:n;content:counter(n);display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--mustard);color:var(--green-d);font-weight:900;font-family:var(--f-display);margin-bottom:6px}
+.steps b{display:block}
+.steps span{color:var(--muted);font-size:.88rem}
+.staff{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;background:var(--surface);border-radius:16px;padding:24px;border:1px solid var(--line)}
+.face{width:110px;height:110px;border-radius:50%;background:var(--line);display:grid;place-items:center;color:var(--muted);font-size:.75rem;text-align:center}
+.staff p{margin:6px 0 0;color:var(--muted)}
+.ng{background:var(--surface);border-radius:12px;padding:20px;border:1px dashed var(--muted)}
+.ng ul{margin:0;padding-left:1.2em;color:var(--muted)}
+form{display:grid;gap:12px;background:var(--surface);padding:24px;border-radius:16px;border:1px solid var(--line)}
+form label{display:grid;gap:4px;font-weight:700;font-size:.92rem}
+input[type=text],textarea{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);width:100%;color:var(--ink)}
+.btn{font:inherit;font-weight:700;background:var(--mustard);color:var(--green-d);border:0;border-radius:999px;padding:12px 24px;cursor:pointer;justify-self:start}
+.sent{color:var(--green);font-weight:700;margin:0}
+footer{background:var(--green-d);color:#cfe3d8;font-size:.82rem}
+footer .wrap{padding-block:24px;display:grid;gap:4px}
+@media (max-width:800px){
+  .hero .wrap,.menu{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .staff{grid-template-columns:1fr;justify-items:start}
+}
+</style>
+</head>
+<body>
+<div class="demo"><div class="wrap"><span>generalstoreall 制作のデモサイトです。屋号・電話番号・料金はすべて架空の表示例です。</span><a href="demos-index.html">← デモ一覧へ</a></div></div>
+
+<header><div class="wrap">
+  <div class="logo"><i>て</i>てつだい堂</div>
+  <div class="tel">ご相談 <b>048-000-0000</b>（デモ番号）</div>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div>
+    <h1>家の「ちょっと困った」を、<br><mark>まとめて</mark>片付けます。</h1>
+    <p>電球1個の交換から、引っ越し前の不用品の運び出しまで。1件ずつ業者を探さなくても、まとめてお願いできます。川口市・蕨市・戸田市で活動しています。</p>
+  </div>
+  <div class="bubbles" aria-label="ご依頼の多い作業">
+    <span>家具の組み立て</span><span>電球・照明の交換</span><span>庭の草むしり</span><span>網戸の張り替え</span><span>粗大ごみの運び出し</span><span>エアコンの掃除</span><span>棚の取り付け</span><span>買い物の代行</span><span>カーテンレール</span>
+  </div>
+</div></div>
+
+<main>
+<section><div class="wrap">
+  <div class="head"><h2>作業メニューと料金</h2><p class="lead">頼みたい作業にチェックを入れると、合計の目安を計算します。料金はデモ用の表示例です。</p></div>
+  <div class="tabs" id="tabs">
+    <button type="button" data-c="all" aria-pressed="true">すべて</button>
+    <button type="button" data-c="in" aria-pressed="false">家の中</button>
+    <button type="button" data-c="out" aria-pressed="false">庭・屋外</button>
+    <button type="button" data-c="move" aria-pressed="false">運び出し</button>
+  </div>
+  <div class="menu" id="menu">
+    <label class="item" data-c="in"><input type="checkbox" id="m1" data-p="3000"><span><b>電球・照明器具の交換</b><small>1か所あたり。高所や吹き抜けは要相談</small></span><span class="yen">3,000円</span></label>
+    <label class="item" data-c="in"><input type="checkbox" id="m2" data-p="5000"><span><b>家具の組み立て</b><small>カラーボックス・棚など1点</small></span><span class="yen">5,000円〜</span></label>
+    <label class="item" data-c="in"><input type="checkbox" id="m3" data-p="4000"><span><b>網戸の張り替え</b><small>1枚あたり、網代込み</small></span><span class="yen">4,000円</span></label>
+    <label class="item" data-c="in"><input type="checkbox" id="m4" data-p="6000"><span><b>棚・手すりの取り付け</b><small>下地の確認を含む</small></span><span class="yen">6,000円〜</span></label>
+    <label class="item" data-c="out"><input type="checkbox" id="m5" data-p="8000"><span><b>庭の草むしり</b><small>10㎡あたりの目安</small></span><span class="yen">8,000円〜</span></label>
+    <label class="item" data-c="out"><input type="checkbox" id="m6" data-p="5000"><span><b>雨樋・ベランダの掃除</b><small>2階建てまで</small></span><span class="yen">5,000円〜</span></label>
+    <label class="item" data-c="move"><input type="checkbox" id="m7" data-p="7000"><span><b>家具の移動・運び出し</b><small>作業員2名・30分まで</small></span><span class="yen">7,000円〜</span></label>
+    <label class="item" data-c="move"><input type="checkbox" id="m8" data-p="4000"><span><b>粗大ごみの搬出</b><small>集積所までの運び出し。処分は自治体へ</small></span><span class="yen">4,000円〜</span></label>
+  </div>
+  <div class="total" aria-live="polite">
+    <div><small>選んだ作業の合計（目安）</small><b id="sum">0円</b></div>
+    <div><small id="cnt">作業を選んでください</small><small>出張費：市内無料（表示例）</small></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><h2>ご依頼の流れ</h2></div>
+  <ol class="steps">
+    <li><b>お問い合わせ</b><span>電話かフォームで、困りごとをそのままお伝えください。</span></li>
+    <li><b>お見積り</b><span>写真を送っていただければ、その場で金額をお伝えします。</span></li>
+    <li><b>作業</b><span>ご都合のよい日時にお伺いします。</span></li>
+    <li><b>お支払い</b><span>作業後に現金・振込・QR決済で。</span></li>
+  </ol>
+</div></section>
+
+<section><div class="wrap">
+  <div class="staff">
+    <div class="face">店主の写真<br>（制作時に差し替え）</div>
+    <div><h3>店主あいさつ（掲載例）</h3><p>ここには店主の経歴と、どんな気持ちで仕事をしているかを書きます。便利屋は「誰が来るか」で選ばれるので、顔写真と人柄が伝わる文章が一番の安心材料になります。</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="ng"><h3>お引き受けできない作業</h3><ul>
+    <li>電気工事士や水道工事の資格が必要な工事（配線工事など）は、提携する有資格の業者をご紹介します。</li>
+    <li>家庭ごみ・粗大ごみの収集運搬・処分は行いません。自治体の収集をご利用ください。</li>
+  </ul></div>
+</div></section>
+
+<section><div class="wrap">
+  <form id="f" novalidate>
+    <h2>お問い合わせ</h2>
+    <label for="nm">お名前<input type="text" id="nm" autocomplete="off" placeholder="例）蕨 花子"></label>
+    <label for="ms">困っていること<textarea id="ms" rows="3" placeholder="例）寝室の照明が届かなくて交換できない"></textarea></label>
+    <button class="btn" type="submit">送る</button>
+    <p class="sent" id="sent" hidden>デモのため送信はされません。</p>
+  </form>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>© てつだい堂（架空のデモ屋号）</span><span>Website demo by generalstoreall</span></div></footer>
+
+<script>
+(function(){
+  const items=[...document.querySelectorAll('#menu .item')];
+  const boxes=items.map(i=>i.querySelector('input'));
+  function calc(){
+    let s=0,n=0;
+    boxes.forEach(b=>{if(b.checked){s+=+b.dataset.p;n++}});
+    document.getElementById('sum').textContent=s.toLocaleString('ja-JP')+'円〜';
+    document.getElementById('cnt').textContent=n?n+'件の作業をまとめて依頼':'作業を選んでください';
+    if(!n)document.getElementById('sum').textContent='0円';
+  }
+  boxes.forEach(b=>b.addEventListener('change',calc));
+  const tabs=[...document.querySelectorAll('#tabs button')];
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.setAttribute('aria-pressed',x===t));
+    items.forEach(i=>{i.hidden=!(t.dataset.c==='all'||i.dataset.c===t.dataset.c)});
+  }));
+  document.getElementById('f').addEventListener('submit',e=>{e.preventDefault();document.getElementById('sent').hidden=false});
+})();
+</script>
+</body>
+</html>

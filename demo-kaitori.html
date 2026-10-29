@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>買取 ふるみち屋</title>
+<meta name="description" content="買取店向けデモサイト（架空企業）。制作：generalstoreall">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+/* Layout: 査定方法を選ばせる型。品目グリッド→3つの買取方法→本人確認と古物商表示で信頼を担保 */
+:root{
+  --bg:#f6f5f1; --surface:#ffffff; --ink:#1c2420; --muted:#5d6762; --line:#e0ddd3;
+  --green:#14463a; --green-l:#e3ece8; --brass:#a87b2d; --brass-l:#f3e8d2;
+  --f-display:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-body:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);line-height:1.8;font-size:16px}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance;margin:0;font-family:var(--f-display);font-weight:800}
+h2{font-size:clamp(1.5rem,3.6vw,2.1rem)}
+:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.demo{background:var(--brass);color:#fff;font-size:.8rem;font-weight:700;text-align:center}
+.demo .wrap{padding-block:6px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.demo a{color:#fff}
+.permit{background:var(--green);color:#dfe9e4;font-size:.78rem}
+.permit .wrap{padding-block:6px;display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+header{background:var(--surface);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:14px;flex-wrap:wrap}
+.logo{font-family:var(--f-display);font-weight:800;font-size:1.45rem;color:var(--green);display:flex;align-items:center;gap:10px}
+.logo span{border:2px solid var(--brass);color:var(--brass);font-size:.75rem;padding:1px 6px;letter-spacing:.1em}
+nav{display:flex;gap:16px;font-size:.9rem;flex-wrap:wrap}
+nav a{color:var(--ink);text-decoration:none;border-bottom:2px solid transparent}
+nav a:hover{border-bottom-color:var(--brass)}
+.hero{background:var(--green);color:#fff}
+.hero .wrap{padding-block:52px;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:end}
+.hero h1{font-size:clamp(2rem,5.6vw,3.3rem);line-height:1.35}
+.hero p{color:#cfe0d8;margin:14px 0 0}
+.seal{justify-self:end;width:200px;aspect-ratio:1;max-width:100%;border:3px double var(--brass-l);border-radius:50%;display:grid;place-items:center;text-align:center;font-family:var(--f-display);color:var(--brass-l);font-size:1.05rem;line-height:1.5;padding:20px}
+.seal b{font-size:1.6rem;display:block}
+section{padding-block:56px}
+.head{display:grid;gap:6px;margin-bottom:24px}
+.eyebrow{color:var(--brass);font-weight:700;letter-spacing:.2em;font-size:.8rem}
+.lead{color:var(--muted);margin:0;max-width:40em}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.cat{background:var(--surface);padding:20px 16px;display:grid;gap:4px;align-content:start}
+.cat b{font-family:var(--f-display);font-size:1.15rem;color:var(--green)}
+.cat small{color:var(--muted);font-size:.82rem;line-height:1.6}
+.ways{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.way{background:var(--surface);border:1px solid var(--line);padding:24px;display:grid;gap:10px;align-content:start}
+.way .k{font-family:var(--f-display);font-size:2rem;color:var(--brass);line-height:1}
+.way h3{font-size:1.25rem}
+.way p{margin:0;color:var(--muted);font-size:.92rem}
+.way ul{margin:0;padding-left:1.1em;font-size:.88rem}
+.idbox{display:grid;grid-template-columns:1fr 1fr;gap:24px;background:var(--green-l);padding:28px;border-left:4px solid var(--green)}
+.idbox ul{margin:8px 0 0;padding-left:1.2em}
+.idbox p{margin:8px 0 0;color:var(--muted);font-size:.9rem}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tips div{border-top:2px solid var(--brass);padding-top:12px}
+.tips b{display:block;font-family:var(--f-display);font-size:1.05rem}
+.tips p{margin:4px 0 0;color:var(--muted);font-size:.9rem}
+.shop{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.shop dl{display:grid;grid-template-columns:8em 1fr;gap:8px 16px;margin:0;background:var(--surface);padding:24px;border:1px solid var(--line)}
+.shop dt{color:var(--muted);font-size:.88rem}
+.shop dd{margin:0}
+.map{background:repeating-linear-gradient(0deg,var(--line) 0 1px,transparent 1px 32px),repeating-linear-gradient(90deg,var(--line) 0 1px,var(--surface) 1px 32px);border:1px solid var(--line);display:grid;place-items:center;min-height:220px;color:var(--muted);font-size:.85rem}
+footer{background:var(--green);color:#cfe0d8;font-size:.82rem}
+footer .wrap{padding-block:24px;display:grid;gap:4px}
+@media (max-width:820px){
+  .hero .wrap,.ways,.idbox,.tips,.shop{grid-template-columns:1fr}
+  .cats{grid-template-columns:repeat(2,1fr)}
+  .seal{justify-self:start;width:160px}
+  .shop dl{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="demo"><div class="wrap"><span>generalstoreall 制作のデモサイトです。店名・許可番号・電話番号はすべて架空の表示例です。</span><a href="demos-index.html">← デモ一覧へ</a></div></div>
+<div class="permit"><div class="wrap"><span>古物商許可：埼玉県公安委員会 第○○○○○○○○○○○○号（表示例）</span><span>運営：ふるみち屋（架空）</span></div></div>
+
+<header><div class="wrap">
+  <div class="logo">ふるみち屋<span>買取</span></div>
+  <nav><a href="#items">買取品目</a><a href="#ways">買取方法</a><a href="#id">本人確認</a><a href="#shop">店舗</a></nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div>
+    <h1>使わなくなった物に、<br>次の持ち主を。</h1>
+    <p>ブランド品・時計・貴金属から、遺品整理の家財まで。査定の根拠を一点ずつご説明し、金額にご納得いただけなければお持ち帰りいただけます。</p>
+  </div>
+  <div class="seal"><span><b>査定無料</b>キャンセル料<br>いただきません</span></div>
+</div></div>
+
+<main>
+<section id="items"><div class="wrap">
+  <div class="head"><p class="eyebrow">ITEMS</p><h2>買取品目</h2><p class="lead">壊れている物、箱がない物もまずはご相談ください。</p></div>
+  <div class="cats">
+    <div class="cat"><b>ブランド品</b><small>バッグ・財布・小物。付属品があると査定額が上がりやすくなります</small></div>
+    <div class="cat"><b>時計</b><small>動かない物も査定します</small></div>
+    <div class="cat"><b>貴金属</b><small>金・プラチナ。切れたネックレス、片方だけのピアスも</small></div>
+    <div class="cat"><b>骨董・美術品</b><small>掛け軸・茶道具・陶磁器</small></div>
+    <div class="cat"><b>カメラ・レンズ</b><small>フィルムカメラも対象です</small></div>
+    <div class="cat"><b>工具</b><small>電動工具・大工道具</small></div>
+    <div class="cat"><b>お酒</b><small>未開栓のウイスキー・ブランデー</small></div>
+    <div class="cat"><b>家財一式</b><small>遺品整理・引っ越し前の整理</small></div>
+  </div>
+</div></section>
+
+<section id="ways"><div class="wrap">
+  <div class="head"><p class="eyebrow">HOW TO SELL</p><h2>3つの買取方法</h2></div>
+  <div class="ways">
+    <div class="way"><span class="k">店頭</span><h3>お店に持ち込む</h3><p>予約なしで査定します。目の前で一点ずつ確認します。</p><ul><li>査定時間の目安：10〜30分</li><li>その場で現金でお支払い</li></ul></div>
+    <div class="way"><span class="k">出張</span><h3>ご自宅へ伺う</h3><p>量が多い、大きくて運べない場合に。出張費はいただきません（表示例）。</p><ul><li>川口市・蕨市・戸田市ほか</li><li>遺品整理のご相談も</li></ul></div>
+    <div class="way"><span class="k">宅配</span><h3>箱に詰めて送る</h3><p>査定額をご連絡し、ご了承いただいてからお振込みします。</p><ul><li>ご不成立時の返送方法は事前にご案内</li><li>本人確認書類のコピーが必要</li></ul></div>
+  </div>
+</div></section>
+
+<section id="id"><div class="wrap">
+  <div class="idbox">
+    <div><h3>本人確認書類をお持ちください</h3><p>古物営業法により、買取の際はお客様の本人確認が義務付けられています。</p></div>
+    <div><ul><li>運転免許証</li><li>マイナンバーカード（表面のみ）</li><li>その他の書類はお問い合わせください</li></ul><p>18歳未満の方からの買取はお受けしていません（表示例）。</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><p class="eyebrow">TIPS</p><h2>査定額を上げるために</h2></div>
+  <div class="tips">
+    <div><b>付属品をそろえる</b><p>箱・保証書・替えベルトなど、購入時に付いていた物は一緒にお持ちください。</p></div>
+    <div><b>軽く汚れを落とす</b><p>乾いた布で拭く程度で十分です。強くこするとかえって傷になります。</p></div>
+    <div><b>まとめて持ち込む</b><p>複数点をまとめて査定に出していただくと、査定額に反映しやすくなります。</p></div>
+  </div>
+</div></section>
+
+<section id="shop"><div class="wrap shop">
+  <dl>
+    <dt>店名</dt><dd>ふるみち屋（架空）</dd>
+    <dt>所在地</dt><dd>埼玉県川口市○○（表示例）</dd>
+    <dt>営業時間</dt><dd>10:00〜19:00（水曜定休）</dd>
+    <dt>電話</dt><dd>048-000-0000（デモ番号）</dd>
+    <dt>古物商許可</dt><dd>埼玉県公安委員会<br>第○○○○○○○○○○○○号（表示例）</dd>
+  </dl>
+  <div class="map">地図（制作時にGoogleマップへのリンクを設置）</div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>© ふるみち屋（架空のデモ店舗）／古物商許可 埼玉県公安委員会 第○○○○○○○○○○○○号（表示例）</span><span>Website demo by generalstoreall</span></div></footer>
+</body>
+</html>
